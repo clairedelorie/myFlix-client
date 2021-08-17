@@ -2,10 +2,9 @@
   "name": "myflix-client",
   "version": "1.0.0",
   "description": "",
-  "main": "src/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "parcel serve ./src/index.html",
+    "start": "parcel serve C:\\Users\\delor\\Documents\\careerfoundry\\myFlix-client\\src\\index.html",
     "build": "babel src -d build"
   },
   "author": "",
@@ -15,10 +14,9 @@
     "react-dom": "^17.0.2"
   },
   "devDependencies": {
-    "@babel/generator": "^7.15.0",
-    "@babel/parser": "^7.15.3",
-    "@babel/traverse": "^7.15.0",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0"
+    "@babel/core": "^7.15.0",
+    "@parcel/transformer-babel": "^2.0.0-alpha.3",
+    "babel-preset-env": "^1.7.0",
+    "sass": "^1.37.5"
   }
 }
