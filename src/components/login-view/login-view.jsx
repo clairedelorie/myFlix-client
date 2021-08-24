@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-import "./login-view.scss";
+// import "./login-view.scss";
 
 export function LoginView(props) {
   const [username, setUsername] = useState("");
@@ -13,7 +13,7 @@ export function LoginView(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8080/login", {
+      .post("https://boiling-savannah-13307.herokuapp.com/movies", {
         Username: username,
         Password: password,
       })
