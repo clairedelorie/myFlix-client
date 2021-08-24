@@ -38,15 +38,14 @@ export class MainView extends React.Component {
     });
   }
 
-  onRegistration(register) {
-    this.setState({
-      register,
-    });
-  }
-
   onLoggedIn(user) {
     this.setState({
       user,
+    });
+  }
+  onRegistration(register) {
+    this.setState({
+      register,
     });
   }
 
@@ -56,7 +55,7 @@ export class MainView extends React.Component {
     if (!user)
       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
 
-    if (!user)
+    if (!register)
       return (
         <RegistrationView
           onRegistration={(user) => this.onRegistration(user)}
