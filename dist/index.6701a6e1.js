@@ -947,21 +947,23 @@ var _reactDom = require("react-dom");
 var _reactDomDefault = parcelHelpers.interopDefault(_reactDom);
 var _mainView = require("./components/main-view/main-view");
 var _mainViewDefault = parcelHelpers.interopDefault(_mainView);
+var _container = require("react-bootstrap/Container");
+var _containerDefault = parcelHelpers.interopDefault(_container);
 // Import statement to indicate that you need to bundle `./index.scss`
 var _indexScss = require("./index.scss");
 // Main component (will eventually use all the others)
 class MyFlixApplication extends _reactDefault.default.Component {
     render() {
-        return(/*#__PURE__*/ _jsxRuntime.jsx(Container, {
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_containerDefault.default, {
             __source: {
                 fileName: "src/index.jsx",
-                lineNumber: 12
+                lineNumber: 13
             },
             __self: this,
             children: /*#__PURE__*/ _jsxRuntime.jsx(_mainViewDefault.default, {
                 __source: {
                     fileName: "src/index.jsx",
-                    lineNumber: 13
+                    lineNumber: 14
                 },
                 __self: this
             })
@@ -978,7 +980,7 @@ _reactDomDefault.default.render(/*#__PURE__*/ _reactDefault.default.createElemen
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom":"gkWJK","./components/main-view/main-view":"2zHas","./index.scss":"jUTZ8","@parcel/transformer-js/src/esmodule-helpers.js":"54bRL","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"1D11o"}],"8xIwr":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","react-dom":"gkWJK","./components/main-view/main-view":"2zHas","./index.scss":"jUTZ8","@parcel/transformer-js/src/esmodule-helpers.js":"54bRL","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"1D11o","react-bootstrap/Container":"2PRIq"}],"8xIwr":[function(require,module,exports) {
 'use strict';
 module.exports = require('./cjs/react-jsx-runtime.development.js');
 
@@ -22855,50 +22857,50 @@ class MainView extends _reactDefault.default.Component {
             __self: this,
             children: "Logout"
         });
-        return(/*#__PURE__*/ _jsxRuntime.jsx("div", {
-            className: "main-view",
+        return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+            className: "main-view justify-content-md-center",
             __source: {
                 fileName: "src/components/main-view/main-view.jsx",
                 lineNumber: 103
             },
             __self: this,
-            children: selectedMovie ? /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
-                className: "justify-content-md-center",
+            children: selectedMovie ? /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                md: 8,
                 __source: {
                     fileName: "src/components/main-view/main-view.jsx",
                     lineNumber: 105
                 },
                 __self: this,
-                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                    md: 8,
-                    __source: {
-                        fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 106
-                    },
-                    __self: this,
-                    children: /*#__PURE__*/ _jsxRuntime.jsx(_movieView.MovieView, {
-                        movie: selectedMovie,
-                        onBackClick: (newSelectedMovie)=>{
-                            this.setSelectedMovie(newSelectedMovie);
-                        },
-                        __source: {
-                            fileName: "src/components/main-view/main-view.jsx",
-                            lineNumber: 107
-                        },
-                        __self: this
-                    })
-                })
-            }) : movies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
-                    movie: movie,
-                    onMovieClick: (newSelectedMovie)=>{
+                children: /*#__PURE__*/ _jsxRuntime.jsx(_movieView.MovieView, {
+                    movie: selectedMovie,
+                    onBackClick: (newSelectedMovie)=>{
                         this.setSelectedMovie(newSelectedMovie);
                     },
                     __source: {
                         fileName: "src/components/main-view/main-view.jsx",
-                        lineNumber: 117
+                        lineNumber: 106
                     },
                     __self: this
-                }, movie._id)
+                })
+            }) : movies.map((movie)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                    md: 3,
+                    __source: {
+                        fileName: "src/components/main-view/main-view.jsx",
+                        lineNumber: 115
+                    },
+                    __self: this,
+                    children: /*#__PURE__*/ _jsxRuntime.jsx(_movieCard.MovieCard, {
+                        movie: movie,
+                        onMovieClick: (newSelectedMovie)=>{
+                            this.setSelectedMovie(newSelectedMovie);
+                        },
+                        __source: {
+                            fileName: "src/components/main-view/main-view.jsx",
+                            lineNumber: 116
+                        },
+                        __self: this
+                    }, movie._id)
+                })
             )
         }));
     }
