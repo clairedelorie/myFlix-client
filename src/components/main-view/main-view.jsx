@@ -38,22 +38,6 @@ export class MainView extends React.Component {
     });
   }
 
-  getMovies(token) {
-    axios
-      .get("https://boiling-savannah-13307.herokuapp.com/movies", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   onLoggedIn(authData) {
     console.log(authData);
     this.setState({
@@ -71,13 +55,29 @@ export class MainView extends React.Component {
     });
   }
 
+  getMovies(token) {
+    axios
+      .get("https://boiling-savannah-13307.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        // Assign the result to the state
+        this.setState({
+          movies: response.data,
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render() {
-    const { movies, selectedMovie, user, register } = this.state;
+    const { movies, selectedMovie, user } = this.state;
 
     if (!user)
       return <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />;
 
-    if (!register)
+    if (!user)
       return (
         <RegistrationView
           onRegistration={(user) => this.onRegistration(user)}
