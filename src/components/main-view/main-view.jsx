@@ -20,16 +20,13 @@ export class MainView extends React.Component {
   }
 
   componentDidMount() {
-    axios
-      .get("https://boiling-savannah-13307.herokuapp.com/movies")
-      .then((response) => {
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch((error) => {
-        console.log(error);
+    let accessToken = localStorage.getItem("token");
+    if (accessToken !== null) {
+      this.setState({
+        user: localStorage.getItem("user"),
       });
+      this.getMovies(accessToken);
+    }
   }
 
   setSelectedMovie(movie) {
@@ -52,6 +49,14 @@ export class MainView extends React.Component {
   onRegistration(register) {
     this.setState({
       register,
+    });
+  }
+
+  onLoggedOut() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    this.setState({
+      user: null,
     });
   }
 
@@ -85,6 +90,14 @@ export class MainView extends React.Component {
       );
 
     if (movies.length === 0) return <div className="main-view" />;
+
+    <button
+      onClick={() => {
+        this.onLoggedOut();
+      }}
+    >
+      Logout
+    </button>;
 
     return (
       <div className="main-view">
