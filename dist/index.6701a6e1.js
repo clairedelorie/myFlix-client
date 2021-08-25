@@ -22774,20 +22774,6 @@ class MainView extends _reactDefault.default.Component {
             selectedMovie: movie
         });
     }
-    getMovies(token) {
-        _axiosDefault.default.get("https://boiling-savannah-13307.herokuapp.com/movies", {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        }).then((response)=>{
-            // Assign the result to the state
-            this.setState({
-                movies: response.data
-            });
-        }).catch(function(error) {
-            console.log(error);
-        });
-    }
     onLoggedIn(authData) {
         console.log(authData);
         this.setState({
@@ -22802,8 +22788,22 @@ class MainView extends _reactDefault.default.Component {
             register
         });
     }
+    getMovies(token) {
+        _axiosDefault.default.get("https://boiling-savannah-13307.herokuapp.com/movies", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        }).then((response)=>{
+            // Assign the result to the state
+            this.setState({
+                movies: response.data
+            });
+        }).catch(function(error) {
+            console.log(error);
+        });
+    }
     render() {
-        const { movies , selectedMovie , user , register  } = this.state;
+        const { movies , selectedMovie , user  } = this.state;
         if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_loginView.LoginView, {
             onLoggedIn: (user1)=>this.onLoggedIn(user1)
             ,
@@ -22813,7 +22813,7 @@ class MainView extends _reactDefault.default.Component {
             },
             __self: this
         }));
-        if (!register) return(/*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
+        if (!user) return(/*#__PURE__*/ _jsxRuntime.jsx(_registrationView.RegistrationView, {
             onRegistration: (user1)=>this.onRegistration(user1)
             ,
             __source: {
@@ -24561,7 +24561,7 @@ class MovieView extends _reactDefault.default.Component {
                                 lineNumber: 22
                             },
                             __self: this,
-                            children: movie.Genre
+                            children: movie.Genre.Name
                         })
                     ]
                 }),
@@ -24589,7 +24589,7 @@ class MovieView extends _reactDefault.default.Component {
                                 lineNumber: 26
                             },
                             __self: this,
-                            children: movie.Director
+                            children: movie.Director.Name
                         })
                     ]
                 }),
@@ -24644,7 +24644,7 @@ function LoginView(props) {
     const [password, setPassword] = _react.useState("");
     const handleSubmit = (e)=>{
         e.preventDefault();
-        _axiosDefault.default.post("https://boiling-savannah-13307.herokuapp.com/movies", {
+        _axiosDefault.default.post("https://boiling-savannah-13307.herokuapp.com/login", {
             Username: username,
             Password: password
         }).then((response)=>{
