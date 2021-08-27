@@ -106,6 +106,18 @@ export class MainView extends React.Component {
           />
 
           <Route
+            path="/profile"
+            render={() => {
+              if (!user)
+                return (
+                  <Col>
+                    <ProfileView />
+                  </Col>
+                );
+            }}
+          />
+
+          <Route
             path="/movies/:movieId"
             render={({ match, history }) => {
               return (
