@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-import { Row, Col, Button, Container, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Row, Button, Card } from "react-bootstrap";
 
 // import "./profile-view.scss";
 
@@ -93,7 +92,7 @@ export class ProfileView extends React.Component {
   handleUpdate(e) {
     e.preventDefault();
     const token = localStorage.getItem("token");
-    const username = localStorage.getItem("user");
+    const user = localStorage.getItem("user");
 
     axios
       .put("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
@@ -147,7 +146,7 @@ export class ProfileView extends React.Component {
                     return (
                       <CardDeck className="movie-card-deck">
                         <Card
-                          className="favorites-item card-content"
+                          className="favorite-item card-content"
                           style={{ width: "16rem" }}
                           key={movie._id}
                         >
@@ -195,41 +194,43 @@ export class ProfileView extends React.Component {
                 )
               }
             >
-              <Form.Group controlId="formUsername">
-                <Form.Label className="form-label">Username</Form.Label>
+              <Form.Group controlId="formUpdateUsername">
+                <Form.Label>Username:</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Change Username"
-                  onChange={(e) => this.setUsername(e.target.value)}
+                  placeholder="Enter Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="formPassword">
-                <Form.Label className="form-label">
-                  Password<span className="required">*</span>
-                </Form.Label>
+              <Form.Group controlId="formUpdatePassword">
+                <Form.Label>Password:</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="New Password"
-                  onChange={(e) => this.setPassword(e.target.value)}
+                  placeholder="Enter Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="formEmail">
-                <Form.Label className="form-label">Email</Form.Label>
+              <Form.Group controlId="formUpdateEmail">
+                <Form.Label>Email:</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Change Email"
-                  onChange={(e) => this.setEmail(e.target.value)}
+                  placeholder="Enter Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Form.Group>
 
-              <Form.Group controlId="formBirthday">
-                <Form.Label className="form-label">Birthdate</Form.Label>
+              <Form.Group controlId="formUpdateBirthdate">
+                <Form.Label>Birthdate:</Form.Label>
                 <Form.Control
                   type="date"
-                  placeholder="Change Birthdate"
-                  onChange={(e) => this.setBirthdate(e.target.value)}
+                  placeholder="00-00-0000"
+                  value={birthdate}
+                  onChange={(e) => setBirthdate(e.target.value)}
                 />
               </Form.Group>
 
