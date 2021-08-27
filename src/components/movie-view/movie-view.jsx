@@ -1,5 +1,7 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import propTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 import "./movie-view.scss";
 
