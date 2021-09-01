@@ -1,7 +1,9 @@
 import React from "react";
 import axios from "axios";
 
-import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
@@ -11,31 +13,24 @@ import { ProfileView } from "../profile-view/profile-view";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 
+import { setMovies } from "../../actions/actions";
+
 import { Row, Col } from "react-bootstrap";
 
-export class MainView extends React.Component {
+// we haven't written this one yet
+import MoviesList from "../movies-list/movies-list";
+/* 
+  #1 The rest of components import statements but without the MovieCard's 
+  because it will be imported and used in the MoviesList component rather
+  than in here. 
+*/
+
+class MainView extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: [],
       user: null,
     };
-  }
-
-  getMovies(token) {
-    axios
-      .get("https://boiling-savannah-13307.herokuapp.com/movies", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        // Assign the result to the state
-        this.setState({
-          movies: response.data,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   componentDidMount() {
@@ -46,6 +41,19 @@ export class MainView extends React.Component {
       });
       this.getMovies(accessToken);
     }
+  }
+
+  getMovies(token) {
+    axios
+      .get("https://boiling-savannah-13307.herokuapp.com/movies", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.props.setMovies(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   onLoggedIn(authData) {
@@ -60,21 +68,12 @@ export class MainView extends React.Component {
   }
 
   render() {
-    const { movies, user } = this.state;
-
-    if (!user)
-      return (
-        <Row>
-          <Col>
-            <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
-          </Col>
-        </Row>
-      );
-    if (movies.length === 0) return <div className="main-view" />;
+    const { movies } = this.props;
+    const { user } = this.state;
 
     return (
       <Router>
-        <div className="main-view">
+        <Row className="main-view justify-content-md-center">
           <Route
             exact
             path="/"
@@ -85,11 +84,9 @@ export class MainView extends React.Component {
                     <LoginView onLoggedIn={(user) => this.onLoggedIn(user)} />
                   </Col>
                 );
-              return movies.map((m) => (
-                <Col md={3} key={m._id}>
-                  <MovieCard movie={m} />
-                </Col>
-              ));
+              if (movies.length === 0) return <div className="main-view" />;
+
+              return <MoviesList movies={movies} />;
             }}
           />
 
@@ -167,10 +164,14 @@ export class MainView extends React.Component {
               );
             }}
           />
-        </div>
+        </Row>
       </Router>
     );
   }
 }
 
-export default MainView;
+let mapStateToProps = (state) => {
+  return { movies: state.movies };
+};
+
+export default connect(mapStateToProps, { setMovies })(MainView);
