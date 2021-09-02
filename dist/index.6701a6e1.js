@@ -22809,7 +22809,7 @@ class MainView extends _reactDefault.default.Component {
             console.log(error);
         });
     }
-    getUser(username, token) {
+    getUser(token) {
         _axiosDefault.default.get("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
             headers: {
                 Authorization: `Bearer ${token}`
