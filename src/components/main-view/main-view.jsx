@@ -3,27 +3,19 @@ import axios from "axios";
 
 import { connect } from "react-redux";
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
-import { MovieCard } from "../movie-card/movie-card";
-import { MovieView } from "../movie-view/movie-view";
-import { LoginView } from "../login-view/login-view";
-import { RegistrationView } from "../registration-view/registration-view";
-import { ProfileView } from "../profile-view/profile-view";
-import { DirectorView } from "../director-view/director-view";
-import { GenreView } from "../genre-view/genre-view";
+import { setUser, setMovies } from "../../actions/actions";
 
-import { setMovies } from "../../actions/actions";
+import MovieView from "../movie-view/movie-view";
+import LoginView from "../login-view/login-view";
+import RegistrationView from "../registration-view/registration-view";
+import ProfileView from "../profile-view/profile-view";
+import DirectorView from "../director-view/director-view";
+import GenreView from "../genre-view/genre-view";
+import MoviesList from "../movies-list/movies-list";
 
 import { Row, Col } from "react-bootstrap";
-
-// we haven't written this one yet
-import MoviesList from "../movies-list/movies-list";
-/* 
-  #1 The rest of components import statements but without the MovieCard's 
-  because it will be imported and used in the MoviesList component rather
-  than in here. 
-*/
 
 class MainView extends React.Component {
   constructor() {
@@ -34,12 +26,10 @@ class MainView extends React.Component {
   }
 
   componentDidMount() {
-    let accessToken = localStorage.getItem("token");
-    if (accessToken !== null) {
-      this.setState({
-        user: localStorage.getItem("user"),
-      });
-      this.getMovies(accessToken);
+    const token = localStorage.getItem("token");
+    if (token !== null) {
+      this.getUser(token);
+      this.getMovies(token);
     }
   }
 
@@ -56,20 +46,41 @@ class MainView extends React.Component {
       });
   }
 
+  getUser(username, token) {
+    axios
+      .get("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((response) => {
+        this.props.setUser(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   onLoggedIn(authData) {
     console.log(authData);
-    this.setState({
-      user: authData.user.Username,
-    });
+    this.props.setUser(authData.user.Username);
 
     localStorage.setItem("token", authData.token);
     localStorage.setItem("user", authData.user.Username);
     this.getMovies(authData.token);
   }
 
+  logOut() {
+    this.props.setUser(null);
+
+    localStorage.removeItem("user", null);
+    localStorage.removeItem("token", null);
+    localStorage.removeItem("password", null);
+
+    console.log("logged out");
+    window.open("/", "_self");
+  }
+
   render() {
-    const { movies } = this.props;
-    const { user } = this.state;
+    const { movies, user } = this.props;
 
     return (
       <Router>
@@ -130,7 +141,7 @@ class MainView extends React.Component {
 
           <Route
             exact
-            path="/genres/:name"
+            path="/genre/:name"
             render={({ match, history }) => {
               if (movies.length === 0) return <div className="main-view" />;
               return (
@@ -148,7 +159,7 @@ class MainView extends React.Component {
           />
 
           <Route
-            path="/directors/:name"
+            path="/director/:name"
             render={({ match, history }) => {
               if (movies.length === 0) return <div className="main-view" />;
               return (
@@ -171,7 +182,7 @@ class MainView extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-  return { movies: state.movies };
+  return { movies: state.movies, user: state.user };
 };
 
-export default connect(mapStateToProps, { setMovies })(MainView);
+export default connect(mapStateToProps, { setUser, setMovies })(MainView);
