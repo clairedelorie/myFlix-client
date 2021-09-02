@@ -46,7 +46,7 @@ class MainView extends React.Component {
       });
   }
 
-  getUser(username, token) {
+  getUser(token) {
     axios
       .get("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
         headers: { Authorization: `Bearer ${token}` },
