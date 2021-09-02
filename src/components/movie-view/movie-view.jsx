@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import "./movie-view.scss";
 
-export class MovieView extends React.Component {
+export default class MovieView extends React.Component {
   render() {
     const { movie, onBackClick } = this.props;
 
