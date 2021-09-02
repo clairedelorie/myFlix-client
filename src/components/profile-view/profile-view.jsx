@@ -6,7 +6,7 @@ import { Row, Button, Card } from "react-bootstrap";
 
 // import "./profile-view.scss";
 
-export class ProfileView extends React.Component {
+export default class ProfileView extends React.Component {
   constructor() {
     super();
     this.state = {
