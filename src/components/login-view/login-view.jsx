@@ -3,10 +3,11 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { connect } from "react-redux";
 
 import "./login-view.scss";
 
-export function LoginView(props) {
+export default function LoginView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -61,3 +62,5 @@ LoginView.propTypes = {
   }),
   onLoggedIn: PropTypes.func.isRequired,
 };
+
+// export default connect(null, { onLoggedIn })(LoginView);
