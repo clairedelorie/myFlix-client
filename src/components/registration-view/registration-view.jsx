@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 
 import "./registration-view.scss";
 
-export function RegistrationView(props) {
+export default function RegistrationView(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
