@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 
 import "./registration-view.scss";
 
-export default function RegistrationView(props) {
+export default function RegistrationView() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -23,10 +23,10 @@ export default function RegistrationView(props) {
       .then((response) => {
         const data = response.data;
         console.log(data);
-        window.open("/", "_self"); // the second argument '_self' is necessary so that the page will open in the current tab
+        window.open("/", "_self");
       })
       .catch((e) => {
-        console.log("error registering the user");
+        console.log("Something went wrong!");
       });
   };
 
@@ -72,7 +72,7 @@ export default function RegistrationView(props) {
         />
       </Form.Group>
 
-      <Button type="submit" onClick={handleSubmit}>
+      <Button varient="danger" onClick={handleSubmit}>
         Submit
       </Button>
     </Form>
