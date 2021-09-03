@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 
-import { setUser, setMovies } from "../../actions/actions";
+import { setUser, setMovies, setFilter } from "../../actions/actions";
 
 import MovieView from "../movie-view/movie-view";
 import LoginView from "../login-view/login-view";
@@ -16,6 +16,7 @@ import GenreView from "../genre-view/genre-view";
 import MoviesList from "../movies-list/movies-list";
 
 import { Row, Col } from "react-bootstrap";
+import "./main-view.scss";
 
 class MainView extends React.Component {
   constructor() {
@@ -26,10 +27,10 @@ class MainView extends React.Component {
   }
 
   componentDidMount() {
-    const token = localStorage.getItem("token");
-    if (token !== null) {
-      this.getUser(token);
-      this.getMovies(token);
+    const accesstoken = localStorage.getItem("token");
+    if (accesstoken !== null) {
+      this.getUser(accesstoken);
+      this.getMovies(accesstoken);
     }
   }
 
@@ -48,7 +49,7 @@ class MainView extends React.Component {
 
   getUser(token) {
     axios
-      .get("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
+      .get("https://boiling-savannah-13307.herokuapp.com/users", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -61,19 +62,19 @@ class MainView extends React.Component {
 
   onLoggedIn(authData) {
     console.log(authData);
-    this.props.setUser(authData.user.Username);
+    this.props.setUser(authData.user.username);
 
     localStorage.setItem("token", authData.token);
     localStorage.setItem("user", authData.user.Username);
     this.getMovies(authData.token);
   }
 
-  logOut() {
-    this.props.setUser(null);
+  onLoggedOut() {
+    this.props.setUser("");
 
-    localStorage.removeItem("user", null);
-    localStorage.removeItem("token", null);
-    localStorage.removeItem("password", null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    localStorage.removeItem("password");
 
     console.log("logged out");
     window.open("/", "_self");
@@ -181,8 +182,10 @@ class MainView extends React.Component {
   }
 }
 
-let mapStateToProps = (state) => {
+const mapStateToProps = (state) => {
   return { movies: state.movies, user: state.user };
 };
 
-export default connect(mapStateToProps, { setUser, setMovies })(MainView);
+export default connect(mapStateToProps, { setUser, setMovies, setFilter })(
+  MainView
+);
