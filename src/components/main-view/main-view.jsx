@@ -8,11 +8,11 @@ import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
 import { setUser, setMovies, setFilter } from "../../actions/actions";
 
 import MovieView from "../movie-view/movie-view";
-import LoginView from "../login-view/login-view";
+import { LoginView } from "../login-view/login-view";
 import RegistrationView from "../registration-view/registration-view";
 import ProfileView from "../profile-view/profile-view";
-import DirectorView from "../director-view/director-view";
-import GenreView from "../genre-view/genre-view";
+import { DirectorView } from "../director-view/director-view";
+import { GenreView } from "../genre-view/genre-view";
 import MoviesList from "../movies-list/movies-list";
 
 import { Row, Col } from "react-bootstrap";
@@ -29,40 +29,40 @@ class MainView extends React.Component {
   componentDidMount() {
     const accesstoken = localStorage.getItem("token");
     if (accesstoken !== null) {
-      this.getUser(accesstoken);
-      this.getMovies(accesstoken);
+      const username = localStorage.getItem("user");
+      Promise.all([
+        this.getUser(username, accesstoken),
+        this.getMovies(accesstoken),
+      ]).catch((e) => {
+        console.error(e);
+        alert("Something went wrong ...");
+      });
     }
   }
 
   getMovies(token) {
-    axios
+    return axios
       .get("https://boiling-savannah-13307.herokuapp.com/movies", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         this.props.setMovies(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
       });
   }
 
-  getUser(token) {
-    axios
-      .get("https://boiling-savannah-13307.herokuapp.com/users", {
+  getUser(username, token) {
+    return axios
+      .get("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
         this.props.setUser(response.data);
-      })
-      .catch(function (error) {
-        console.log(error);
       });
   }
 
   onLoggedIn(authData) {
     console.log(authData);
-    this.props.setUser(authData.user.username);
+    this.props.setUser(authData.user);
 
     localStorage.setItem("token", authData.token);
     localStorage.setItem("user", authData.user.Username);
@@ -70,11 +70,10 @@ class MainView extends React.Component {
   }
 
   onLoggedOut() {
-    this.props.setUser("");
+    this.props.setUser(null);
 
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    localStorage.removeItem("password");
 
     console.log("logged out");
     window.open("/", "_self");
@@ -142,7 +141,7 @@ class MainView extends React.Component {
 
           <Route
             exact
-            path="/genre/:name"
+            path="/genres/:name"
             render={({ match, history }) => {
               if (movies.length === 0) return <div className="main-view" />;
               return (
@@ -160,7 +159,7 @@ class MainView extends React.Component {
           />
 
           <Route
-            path="/director/:name"
+            path="/directors/:name"
             render={({ match, history }) => {
               if (movies.length === 0) return <div className="main-view" />;
               return (
