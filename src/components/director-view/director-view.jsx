@@ -4,37 +4,33 @@ import Button from "react-bootstrap/Button";
 
 import "./director-view.scss";
 
-export default class DirectorView extends React.Component {
-  render() {
-    const { movies, onBackClick } = this.props;
-
-    return (
-      <div className="director-view">
-        <div className="director-name">
-          <h1>
-            <span className="value">{movies.Director.Name}</span>
-          </h1>
-        </div>
-
-        <div className="director-bio">
-          <span className="value">{movies.Director.Bio}</span>
-        </div>
-
-        <div className="director-birthdate">
-          <span className="value">{movies.Director.Birthdate}</span>
-        </div>
-
-        <Button
-          variant="primary"
-          onClick={() => {
-            onBackClick(null);
-          }}
-        >
-          Back
-        </Button>
+export function DirectorView({ director, onBackClick }) {
+  return (
+    <div className="director-view">
+      <div className="director-name">
+        <h1>
+          <span className="value">{director.Name}</span>
+        </h1>
       </div>
-    );
-  }
+
+      <div className="director-bio">
+        <span className="value">{director.Bio}</span>
+      </div>
+
+      <div className="director-birthdate">
+        <span className="value">{director.Birthdate}</span>
+      </div>
+
+      <Button
+        variant="primary"
+        onClick={() => {
+          onBackClick(null);
+        }}
+      >
+        Back
+      </Button>
+    </div>
+  );
 }
 
 DirectorView.propTypes = {
