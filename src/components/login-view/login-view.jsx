@@ -3,6 +3,7 @@ import axios from "axios";
 import PropTypes from "prop-types";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import "./login-view.scss";
@@ -53,7 +54,7 @@ export function LoginView(props) {
         </Form.Group>
 
         <Button variant="danger" type="submit" onClick={handleSubmit}>
-          Submit
+          Sign in
         </Button>
       </Form>
       <br></br>
@@ -74,5 +75,3 @@ LoginView.propTypes = {
   }),
   onLoggedIn: PropTypes.func.isRequired,
 };
-
-export default connect(LoginView);
