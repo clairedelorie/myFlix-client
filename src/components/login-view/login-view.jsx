@@ -58,12 +58,12 @@ export function LoginView(props) {
               </Button>
             </Form>
 
-            <Col className="mt-5 d-flex" xs={12} md={8} lg={6}>
+            <Col className="mt-5 w-100 d-flex">
               <h4>Don't have an account?</h4>
 
               <Link to="/register">
                 <Button
-                  className="w-auto pb-2 py-0 d-flex"
+                  className="w-auto pb-2 py-0  d-flex"
                   varient="danger"
                   type="button"
                 >
