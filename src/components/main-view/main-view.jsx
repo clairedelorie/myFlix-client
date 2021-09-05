@@ -108,10 +108,11 @@ class MainView extends React.Component {
           collapseOnSelect
           expand="xxl"
           sticky="top"
+          variant="dark"
         >
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto">
+            <Nav className="nav-link">
               <Link className="custom-link mx-3" to={`/`}>
                 Movies
               </Link>
@@ -127,7 +128,7 @@ class MainView extends React.Component {
             </Nav>
             <Button
               className="logout-button mx-3"
-              variant="outline-light"
+              variant="danger"
               onClick={() => {
                 this.onLoggedOut();
               }}
@@ -137,7 +138,7 @@ class MainView extends React.Component {
           </Navbar.Collapse>
         </Navbar>
 
-        <Row className="main-view justify-content-md-center">
+        <Row className="main-view justify-content-center">
           <Route
             exact
             path="/"
@@ -181,12 +182,11 @@ class MainView extends React.Component {
           <Route
             path="/profile"
             render={() => {
-              if (!user)
-                return (
-                  <Col>
-                    <ProfileView />
-                  </Col>
-                );
+              return (
+                <Col>
+                  <ProfileView />
+                </Col>
+              );
             }}
           />
 
@@ -224,6 +224,24 @@ class MainView extends React.Component {
           />
 
           <Route
+            exact
+            path="/genres"
+            render={({ match, history }) => {
+              if (movies.length === 0) return <div className="main-view" />;
+              return (
+                <Col md={8}>
+                  <GenreView
+                    genre={
+                      movies.find((m) => m.Genres === match.params.name).Genre
+                    }
+                    onBackClick={() => history.goBack()}
+                  />
+                </Col>
+              );
+            }}
+          />
+
+          <Route
             path="/directors/:name"
             render={({ match, history }) => {
               if (movies.length === 0) return <div className="main-view" />;
@@ -232,6 +250,24 @@ class MainView extends React.Component {
                   <DirectorView
                     director={
                       movies.find((m) => m.Director.Name === match.params.name)
+                        .Director
+                    }
+                    onBackClick={() => history.goBack()}
+                  />
+                </Col>
+              );
+            }}
+          />
+
+          <Route
+            path="/directors"
+            render={({ match, history }) => {
+              if (movies.length === 0) return <div className="main-view" />;
+              return (
+                <Col>
+                  <DirectorView
+                    director={
+                      movies.find((m) => m.Directors === match.params.name)
                         .Director
                     }
                     onBackClick={() => history.goBack()}
