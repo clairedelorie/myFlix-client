@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import PropTypes from "prop-types";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Row, Col, Button, Form, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
@@ -29,42 +28,53 @@ export function LoginView(props) {
   };
 
   return (
-    <div className="login-view">
-      <h2>Log in to MyFlix</h2>
+    <Container>
+      <Col xs={12} md={8} lg={6} className="d-flex mx-auto">
+        <Row className="d-flex mx-auto mt-5 justify-content-center">
+          <div className="text-center mt-5 login-view">
+            <h2>Welcome to MyFlix</h2>
 
-      <Form>
-        <Form.Group controlId="formUsername">
-          <Form.Label>Username:</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder="Enter Username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </Form.Group>
+            <Form>
+              <Form.Group controlId="formUsername">
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </Form.Group>
 
-        <Form.Group controlId="formPassword">
-          <Form.Label>Password:</Form.Label>
-          <Form.Control
-            type="password"
-            placeholder="Enter Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </Form.Group>
+              <Form.Group controlId="formPassword">
+                <Form.Control
+                  type="password"
+                  placeholder="Enter Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
 
-        <Button variant="danger" type="submit" onClick={handleSubmit}>
-          Sign in
-        </Button>
-      </Form>
-      <br></br>
-      <h2>Create an account</h2>
-      <Link to="/register">
-        <Button varient="danger" type="button">
-          Sign up
-        </Button>
-      </Link>
-    </div>
+              <Button variant="danger" type="submit" onClick={handleSubmit}>
+                Login
+              </Button>
+            </Form>
+
+            <Col className="mt-5 d-flex" xs={12} md={8} lg={6}>
+              <h4>Don't have an account?</h4>
+
+              <Link to="/register">
+                <Button
+                  className="w-auto pb-2 py-0 d-flex"
+                  varient="danger"
+                  type="button"
+                >
+                  Sign up
+                </Button>
+              </Link>
+            </Col>
+          </div>
+        </Row>
+      </Col>
+    </Container>
   );
 }
 
