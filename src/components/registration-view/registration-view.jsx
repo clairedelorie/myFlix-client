@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
+import { Form, Button, Row, Col, Container } from "react-bootstrap";
 
 import "./registration-view.scss";
 
@@ -31,51 +30,57 @@ export default function RegistrationView() {
   };
 
   return (
-    <Form>
-      <Form.Group controlId="formGroupUsername">
-        <Form.Label>Username:</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="Enter Username"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-        />
-      </Form.Group>
+    <Container>
+      <Col xs={12} md={8} lg={6} className="d-flex mx-auto">
+        <Row className="d-flex mx-auto mt-5 justify-content-center">
+          <div className="text-center mt-5 login-view">
+            <h2>Create a myFlix Account</h2>
 
-      <Form.Group controlId="formGroupPassword">
-        <Form.Label>Password:</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Enter Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </Form.Group>
+            <Form>
+              <Form.Group controlId="formGroupUsername">
+                <Form.Control
+                  type="text"
+                  placeholder="Enter Username"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </Form.Group>
 
-      <Form.Group controlId="formGroupEmail">
-        <Form.Label>Email:</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </Form.Group>
+              <Form.Group controlId="formGroupPassword">
+                <Form.Control
+                  type="password"
+                  placeholder="Enter Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </Form.Group>
 
-      <Form.Group controlId="formGroupBirthdate">
-        <Form.Label>Birthdate:</Form.Label>
-        <Form.Control
-          type="date"
-          placeholder="00-00-0000"
-          value={birthdate}
-          onChange={(e) => setBirthdate(e.target.value)}
-        />
-      </Form.Group>
+              <Form.Group controlId="formGroupEmail">
+                <Form.Control
+                  type="email"
+                  placeholder="Enter Email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </Form.Group>
 
-      <Button varient="danger" onClick={handleSubmit}>
-        Submit
-      </Button>
-    </Form>
+              <Form.Group controlId="formGroupBirthdate">
+                <Form.Control
+                  type="date"
+                  placeholder="00-00-0000"
+                  value={birthdate}
+                  onChange={(e) => setBirthdate(e.target.value)}
+                />
+              </Form.Group>
+
+              <Button varient="danger" onClick={handleSubmit}>
+                Sign up!
+              </Button>
+            </Form>
+          </div>
+        </Row>
+      </Col>
+    </Container>
   );
 }
 
@@ -86,5 +91,4 @@ RegistrationView.propTypes = {
     email: PropTypes.string.isRequired,
     birthdate: PropTypes.string.isRequired,
   }),
-  onRegistration: PropTypes.func.isRequired,
 };
