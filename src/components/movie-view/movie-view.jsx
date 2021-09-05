@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
+import { Button, Row, Col } from "react-bootstrap";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 
@@ -10,43 +10,46 @@ export default class MovieView extends React.Component {
     const { movie, onBackClick } = this.props;
 
     return (
-      <div className="movie-view">
-        <div className="movie-poster">
-          <img src={movie.ImagePath} />
-        </div>
+      <Row className="movie-view mt-5 m-auto ">
+        <Col md={12} lg={6} className="movie-poster ">
+          <img className="w-100" src={movie.ImagePath} />
+        </Col>
 
-        <div className="movie-title">
-          <span className="label">Title: </span>
-          <span className="value">{movie.Title}</span>
-        </div>
+        <Col md={12} lg={6} className="movie-body my-auto">
+          <div className="movie-title">
+            <span className="label"> </span>
+            <span className="value">{movie.Title}</span>
+          </div>
 
-        <div className="movie-description">
-          <span className="label">Description: </span>
-          <span className="value">{movie.Description}</span>
-        </div>
+          <div className="movie-genre">
+            <Link to={`/genres/${movie.Genre.Name}`}>
+              <Button variant="link">{movie.Genre.Name}</Button>
+            </Link>
+            <span className="value"></span>
+          </div>
 
-        <div className="movie-genre">
-          <Link to={`/genres/${movie.Genre.Name}`}>
-            <Button variant="link">Genre</Button>
-          </Link>
-          <span className="value">{movie.Genre.Name}</span>
-        </div>
+          <div className="movie-description">
+            <span className="label"> </span>
+            <span className="value">{movie.Description}</span>
+          </div>
 
-        <div className="movie-director">
-          <Link to={`/directors/${movie.Director.Name}`}>
-            <Button variant="link">Director</Button>
-            <span className="value">{movie.Director.Name}</span>
-          </Link>
-        </div>
+          <div className="movie-director">
+            <span className="value">Directed by: </span>
+            <Link to={`/directors/${movie.Director.Name}`}>
+              <Button variant="link">{movie.Director.Name}</Button>
+            </Link>
+          </div>
 
-        <button
-          onClick={() => {
-            onBackClick(null);
-          }}
-        >
-          Back
-        </button>
-      </div>
+          <Button
+            varient="danger"
+            onClick={() => {
+              onBackClick(null);
+            }}
+          >
+            Back
+          </Button>
+        </Col>
+      </Row>
     );
   }
 }
