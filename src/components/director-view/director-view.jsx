@@ -3,33 +3,36 @@ import propTypes from "prop-types";
 import Button from "react-bootstrap/Button";
 
 import "./director-view.scss";
+import { Col, Container, Row } from "react-bootstrap";
 
 export function DirectorView({ director, onBackClick }) {
   return (
-    <div className="director-view">
-      <div className="director-name">
-        <h1>
-          <span className="value">{director.Name}</span>
-        </h1>
-      </div>
+    <Container className="mt-5 director-view">
+      <Col>
+        <Row className=" text-center director-name">
+          <h1>
+            <span className="value">{director.Name}</span>
+          </h1>
+        </Row>
 
-      <div className="director-bio">
-        <span className="value">{director.Bio}</span>
-      </div>
+        <Row className="director-bio">
+          <span className="value">{director.Bio}</span>
+        </Row>
 
-      <div className="director-birthdate">
-        <span className="value">{director.Birthdate}</span>
-      </div>
+        <Row className="director-birthdate">
+          <span className="value">{director.Birthdate}</span>
+        </Row>
 
-      <Button
-        variant="primary"
-        onClick={() => {
-          onBackClick(null);
-        }}
-      >
-        Back
-      </Button>
-    </div>
+        <Button
+          variant="danger"
+          onClick={() => {
+            onBackClick(null);
+          }}
+        >
+          Back
+        </Button>
+      </Col>
+    </Container>
   );
 }
 
