@@ -1,0 +1,55 @@
+.movie-view {
+  box-sizing: border-box;
+  display: block;
+  text-align: center;
+  width: 90%;
+  height: 98vh;
+  margin: auto;
+  padding: 1.5%;
+  border-radius: 10px;
+}
+
+form {
+  text-align: center;
+  width: 300px;
+  margin: auto;
+  padding: 1.5%;
+  border-radius: 10px;
+}
+
+.registerBtn {
+  display: block;
+  width: 250px;
+  margin: auto;
+  margin-top: 1%;
+  margin-bottom: auto;
+}
+.profile-view {
+  padding: 30px;
+  border-radius: 15px;
+}
+.director-view {
+  display: block;
+  width: 100%;
+}
+.genre-view {
+  display: block;
+}
+.filter-input {
+  position: fixed !important;
+}
+*,
+body {
+  padding: 0%;
+  margin: 0%;
+}
+*,
+.app-container {
+  background-color: #1e0521;
+  color: #ff6d69;
+}
+
+body {
+  margin: 0%;
+}
+/*# sourceMappingURL=index.c1e31cef.css.map */

@@ -1,0 +1,22 @@
+$theme-colors: (
+  "danger": #fecc50,
+);
+
+form {
+  // display: block;
+  text-align: center;
+  width: 300px;
+  margin: auto;
+
+  padding: 1.5%;
+
+  border-radius: 10px;
+}
+
+.registerBtn {
+  display: block;
+  width: 250px;
+  margin: auto;
+  margin-top: 1%;
+  margin-bottom: auto;
+}

@@ -1,5 +1,9 @@
-$color: steelblue;
+*,
+.app-container {
+  background-color: #1e0521;
+  color: #ff6d69;
+}
 
-.my-flix {
-  color: $color;
+body {
+  margin: 0%;
 }
