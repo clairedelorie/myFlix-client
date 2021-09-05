@@ -6,63 +6,27 @@
   height: 98vh;
   margin: auto;
   padding: 1.5%;
-  background-color: #98c1d9;
   border-radius: 10px;
-}
-*,
-body {
-  box-sizing: border-box;
 }
 
 form {
-  display: block;
   text-align: center;
   width: 300px;
   margin: auto;
-  margin-top: 15%;
   padding: 1.5%;
-  background-color: #1e0521;
   border-radius: 10px;
 }
 
-label,
-.loginBtn {
-  display: block;
-  width: 250px;
-  margin: auto;
-  margin-top: 1%;
-}
-
-.loginBtn {
-  width: 100px;
-  margin-top: 2%;
-}
-body {
-  box-sizing: border-box;
-}
-
-form {
-  display: block;
-  text-align: center;
-  width: 300px;
-  margin: auto;
-  margin-top: 15%;
-  padding: 1.5%;
-  background-color: #98c1d9;
-  border-radius: 10px;
-}
-
-label,
 .registerBtn {
   display: block;
   width: 250px;
   margin: auto;
   margin-top: 1%;
+  margin-bottom: auto;
 }
-
-.registerBtn {
-  width: 100px;
-  margin-top: 2%;
+.profile-view {
+  padding: 30px;
+  border-radius: 15px;
 }
 .director-view {
   display: block;
@@ -70,18 +34,22 @@ label,
 }
 .genre-view {
   display: block;
-  width: 100%;
 }
+.filter-input {
+  position: fixed !important;
+}
+*,
 body {
-  padding-top: 40px;
+  padding: 0%;
+  margin: 0%;
 }
-.my-flix {
-  color: steelblue;
-}
-
+*,
 .app-container {
   background-color: #1e0521;
   color: #ff6d69;
-  height: 100%;
+}
+
+body {
+  margin: 0%;
 }
 /*# sourceMappingURL=index.c1e31cef.css.map */
