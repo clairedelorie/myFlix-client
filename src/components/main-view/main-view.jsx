@@ -57,7 +57,7 @@ class MainView extends React.Component {
 
   getUser(username, token) {
     return axios
-      .get("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
+      .get(`https://boiling-savannah-13307.herokuapp.com/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -92,14 +92,6 @@ class MainView extends React.Component {
 
   render() {
     const { movies, user } = this.props;
-
-    // if (!user)
-    //   return (
-    //     <LoginView
-    //       onLoggedIn={(user) => this.onLoggedIn(user)}
-    //       handleRegister={this.handleRegister}
-    //     />
-    //   );
 
     return (
       <Router>
@@ -179,6 +171,7 @@ class MainView extends React.Component {
               return <ProfileView history={history} movies={movies} />;
             }}
           />
+
           <Route
             path="/profile"
             render={() => {
@@ -230,12 +223,20 @@ class MainView extends React.Component {
               if (movies.length === 0) return <div className="main-view" />;
               return (
                 <Col md={8}>
-                  <GenreView
-                    genre={
-                      movies.find((m) => m.Genres === match.params.name).Genre
-                    }
-                    onBackClick={() => history.goBack()}
-                  />
+                  {movies
+                    .reduce(
+                      (genres, movie) =>
+                        genres.find((g) => g.Name == movie.Genre.Name)
+                          ? genres
+                          : [...genres, movie.Genre],
+                      []
+                    )
+                    .map((g) => (
+                      <div>
+                        <h2>{g.Name}</h2>
+                        <p>{g.Description}</p>
+                      </div>
+                    ))}
                 </Col>
               );
             }}
@@ -265,13 +266,20 @@ class MainView extends React.Component {
               if (movies.length === 0) return <div className="main-view" />;
               return (
                 <Col>
-                  <DirectorView
-                    director={
-                      movies.find((m) => m.Directors === match.params.name)
-                        .Director
-                    }
-                    onBackClick={() => history.goBack()}
-                  />
+                  {movies
+                    .reduce(
+                      (directors, movie) =>
+                        directors.find((d) => d.Name == movie.Director.Name)
+                          ? directors
+                          : [...directors, movie.Director],
+                      []
+                    )
+                    .map((d) => (
+                      <div>
+                        <h2>{d.Name}</h2>
+                        <p>{d.Bio}</p>
+                      </div>
+                    ))}
                 </Col>
               );
             }}
