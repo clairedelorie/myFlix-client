@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
-import { Button, Card, Form, Col, Row, FloatingLabel } from "react-bootstrap";
-import Accordion from "react-bootstrap/Accordion";
+import { Button, Card, Form, Col, Row } from "react-bootstrap";
 
 import "./profile-view.scss";
 
@@ -30,7 +29,7 @@ export class ProfileView extends React.Component {
   getUser(token) {
     const username = localStorage.getItem("user");
     return axios
-      .get("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
+      .get(`https://boiling-savannah-13307.herokuapp.com/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -49,7 +48,7 @@ export class ProfileView extends React.Component {
 
   getFavorites(token) {
     return axios
-      .get("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
+      .get(`https://boiling-savannah-13307.herokuapp.com/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
@@ -68,7 +67,7 @@ export class ProfileView extends React.Component {
 
     return axios
       .delete(
-        "https://boiling-savannah-13307.herokuapp.com/users/${username}/movies/${movie._id}",
+        `https://boiling-savannah-13307.herokuapp.com/users/${username}/movies/${movie._id}`,
         {
           headers: { Authorization: `Bearer ${token}` },
           validateStatus: function (status) {
@@ -93,7 +92,7 @@ export class ProfileView extends React.Component {
 
     return axios
       .delete(
-        "https://boiling-savannah-13307.herokuapp.com/users/${username}",
+        `https://boiling-savannah-13307.herokuapp.com/users/${username}`,
         { headers: { Authorization: `Bearer ${token}` } }
       )
       .then(() => {
@@ -127,7 +126,7 @@ export class ProfileView extends React.Component {
     const user = localStorage.getItem("user");
 
     axios
-      .put("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
+      .put(`https://boiling-savannah-13307.herokuapp.com/users/${username}`, {
         headers: { Authorization: `Bearer ${token}` },
         data: {
           Username: this.state.Username,
@@ -172,132 +171,93 @@ export class ProfileView extends React.Component {
     const { movies } = this.props;
 
     return (
-      <Row className="profile-view d-flex ">
-        <Accordion defaultActiveKey="0" className="custom-accordion">
-          <Accordion.Item style={{ backgroundColor: "black" }} eventKey="0">
-            <Accordion.Header className="custom-header">
-              <h3 className="profile text-dark">My Profile</h3>
-            </Accordion.Header>
-            <Accordion.Body className="full-white w-100">
-              <Form
-                noValidate
-                validated={validated}
-                className="update-form"
-                onSubmit={(e) => this.handleUpdate(e)}
-              >
-                <Row>
-                  <Form.Group className="mb-3" controlId="formBasicUsername">
-                    <FloatingLabel controlId="username" label="Username">
-                      <Form.Control
-                        type="text"
-                        value={this.state.Username}
-                        onChange={(e) =>
-                          this.setState({ Username: e.target.value })
-                        }
-                      />
-                    </FloatingLabel>
-                  </Form.Group>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                      <FloatingLabel controlId="password" label="Password">
-                        <Form.Control
-                          type="password"
-                          value={this.state.Password}
-                          onChange={(e) =>
-                            this.setState({ Password: e.target.value })
-                          }
-                        />
-                      </FloatingLabel>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <FloatingLabel controlId="email" label="Email address">
-                        <Form.Control
-                          type="email"
-                          value={this.state.Email}
-                          onChange={(e) =>
-                            this.setState({ Email: e.target.value })
-                          }
-                        />
-                      </FloatingLabel>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicBirthdate">
-                      <FloatingLabel
-                        controlId="birthdate"
-                        label="Date of Birth"
-                      >
-                        <Form.Control
-                          type="date"
-                          value={this.state.Birthdate}
-                          onChange={(e) =>
-                            this.setState({ Birthdate: e.target.value })
-                          }
-                        />
-                      </FloatingLabel>
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Card.Body>
-                  <Button
-                    className="mx-3 mt-2"
-                    type="submit"
-                    variant="outline-light"
-                  >
-                    Update
-                  </Button>
-                  <Button
-                    className="mx-3 mt-2"
-                    variant="outline-danger"
-                    onClick={(e) => this.handleDeleteUser(e)}
-                  >
-                    Delete Account
-                  </Button>
-                </Card.Body>
-              </Form>
-            </Accordion.Body>
-          </Accordion.Item>
-          <Accordion.Item style={{ backgroundColor: "black" }} eventKey="1">
-            <Accordion.Header className="text-light full-black mt-md-5">
-              <h3 className="m-auto black-text">Favorites</h3>
-            </Accordion.Header>
-            <Accordion.Body className="text-center full-black" sm={12} md={6}>
-              {(FavoriteMovies || []).length === 0 && (
-                <div className="text-center text-light m-auto">
-                  You don`t have favorite movies yet!
-                </div>
-              )}
-              <div className="favorite-movies d-flex justify-content-center ">
-                {FavoriteMovies.length > 0 &&
-                  movies.map((movie) => {
-                    if (
-                      movie._id ===
-                      FavoriteMovies.find(
-                        (favoriteMovie) => favoriteMovie === movie._id
-                      )
-                    ) {
-                      return (
-                        <Col className="text-center justify-content-center">
-                          <Row className="text-light" key={movie._id}>
-                            <Col
-                              className="m-auto image-container-profile"
-                              sm={12}
-                              md={6}
-                              lg={5}
-                            >
-                              <img
-                                className="movieCard"
-                                src={movie.ImagePath}
-                              />
-                            </Col>
-                          </Row>
-                        </Col>
-                      );
-                    }
-                  })}
+      <Form>
+        <Form.Group className="mb-3" controlId="formBasicUsername">
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            type="text"
+            value={this.state.Username}
+            onChange={(e) => this.setState({ Username: e.target.value })}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={this.state.Password}
+            onChange={(e) => this.setState({ Password: e.target.value })}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            type="email"
+            value={this.state.Email}
+            onChange={(e) => this.setState({ Email: e.target.value })}
+          />
+        </Form.Group>
+
+        <Form.Group className="mb-3" controlId="formBasicBirthdate">
+          <Form.Label>Birthdate</Form.Label>
+          <Form.Control
+            type="date"
+            value={this.state.Birthdate}
+            onChange={(e) => this.setState({ Birthdate: e.target.value })}
+          />
+        </Form.Group>
+
+        <Card.Body>
+          <Button className="mx-3 mt-2" type="submit" variant="outline-light">
+            Update
+          </Button>
+          <Button
+            className="mx-3 mt-2"
+            variant="outline-danger"
+            onClick={(e) => this.handleDeleteUser(e)}
+          >
+            Delete Account
+          </Button>
+        </Card.Body>
+
+        <Card style={{ width: "18rem" }}>
+          <Card.Title>Card Title</Card.Title>
+          <Card.Body className="text-center full-black" sm={12} md={6}>
+            {(FavoriteMovies || []).length === 0 && (
+              <div className="text-center text-light m-auto">
+                No favorites yet!
               </div>
-            </Accordion.Body>
-          </Accordion.Item>
-        </Accordion>
-      </Row>
+            )}
+            <div className="favorite-movies d-flex justify-content-center ">
+              {FavoriteMovies.length > 0 &&
+                movies.map((movie) => {
+                  if (
+                    movie._id ===
+                    FavoriteMovies.find(
+                      (favoriteMovie) => favoriteMovie === movie._id
+                    )
+                  ) {
+                    return (
+                      <Col className="text-center justify-content-center">
+                        <Row className="text-light" key={movie._id}>
+                          <Col
+                            className="m-auto image-container-profile"
+                            sm={12}
+                            md={6}
+                            lg={5}
+                          >
+                            <img className="movieCard" src={movie.ImagePath} />
+                          </Col>
+                        </Row>
+                      </Col>
+                    );
+                  }
+                })}
+            </div>
+          </Card.Body>
+        </Card>
+      </Form>
     );
   }
 }
