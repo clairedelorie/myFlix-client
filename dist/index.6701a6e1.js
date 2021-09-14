@@ -25803,7 +25803,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 174
+                                lineNumber: 175
                             },
                             __self: this
                         }),
@@ -25821,7 +25821,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 185
+                                lineNumber: 186
                             },
                             __self: this
                         }),
@@ -25843,7 +25843,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 199
+                                lineNumber: 200
                             },
                             __self: this
                         }),
@@ -25876,7 +25876,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 218
+                                lineNumber: 219
                             },
                             __self: this
                         }),
@@ -25896,7 +25896,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 244
+                                lineNumber: 245
                             },
                             __self: this
                         }),
@@ -25927,7 +25927,7 @@ class MainView extends _reactDefault.default.Component {
                             },
                             __source: {
                                 fileName: "src/components/main-view/main-view.jsx",
-                                lineNumber: 262
+                                lineNumber: 263
                             },
                             __self: this
                         })
@@ -41778,8 +41778,6 @@ var _propTypesDefault = parcelHelpers.interopDefault(_propTypes);
 var _axios = require("axios");
 var _axiosDefault = parcelHelpers.interopDefault(_axios);
 var _reactBootstrap = require("react-bootstrap");
-var _accordion = require("react-bootstrap/Accordion");
-var _accordionDefault = parcelHelpers.interopDefault(_accordion);
 var _profileViewScss = require("./profile-view.scss");
 class ProfileView extends _reactDefault.default.Component {
     constructor(){
@@ -41801,7 +41799,7 @@ class ProfileView extends _reactDefault.default.Component {
     }
     getUser(token) {
         const username = localStorage.getItem("user");
-        return _axiosDefault.default.get("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
+        return _axiosDefault.default.get(`https://boiling-savannah-13307.herokuapp.com/users/${username}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -41818,7 +41816,7 @@ class ProfileView extends _reactDefault.default.Component {
         });
     }
     getFavorites(token) {
-        return _axiosDefault.default.get("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
+        return _axiosDefault.default.get(`https://boiling-savannah-13307.herokuapp.com/users/${username}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -41833,7 +41831,7 @@ class ProfileView extends _reactDefault.default.Component {
     handleRemove(movie) {
         const token = localStorage.getItem("token");
         const user = localStorage.getItem("user");
-        return _axiosDefault.default.delete("https://boiling-savannah-13307.herokuapp.com/users/${username}/movies/${movie._id}", {
+        return _axiosDefault.default.delete(`https://boiling-savannah-13307.herokuapp.com/users/${username}/movies/${movie._id}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -41852,7 +41850,7 @@ class ProfileView extends _reactDefault.default.Component {
         e.preventDefault();
         const token = localStorage.getItem("token");
         const user = localStorage.getItem("user");
-        return _axiosDefault.default.delete("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
+        return _axiosDefault.default.delete(`https://boiling-savannah-13307.herokuapp.com/users/${username}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -41881,7 +41879,7 @@ class ProfileView extends _reactDefault.default.Component {
         }
         const token = localStorage.getItem("token");
         const user = localStorage.getItem("user");
-        _axiosDefault.default.put("https://boiling-savannah-13307.herokuapp.com/users/${username}", {
+        _axiosDefault.default.put(`https://boiling-savannah-13307.herokuapp.com/users/${username}`, {
             headers: {
                 Authorization: `Bearer ${token}`
             },
@@ -41920,348 +41918,262 @@ class ProfileView extends _reactDefault.default.Component {
     render() {
         const { FavoriteMovies , validated  } = this.state;
         const { movies  } = this.props;
-        return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
-            className: "profile-view d-flex ",
+        return(/*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
             __source: {
                 fileName: "src/components/profile-view/profile-view.jsx",
-                lineNumber: 175
+                lineNumber: 174
             },
             __self: this,
-            children: /*#__PURE__*/ _jsxRuntime.jsxs(_accordionDefault.default, {
-                defaultActiveKey: "0",
-                className: "custom-accordion",
-                __source: {
-                    fileName: "src/components/profile-view/profile-view.jsx",
-                    lineNumber: 176
-                },
-                __self: this,
-                children: [
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_accordionDefault.default.Item, {
-                        style: {
-                            backgroundColor: "black"
-                        },
-                        eventKey: "0",
-                        __source: {
-                            fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 177
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx(_accordionDefault.default.Header, {
-                                className: "custom-header",
-                                __source: {
-                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 178
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsx("h3", {
-                                    className: "profile text-dark",
-                                    __source: {
-                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 179
-                                    },
-                                    __self: this,
-                                    children: "My Profile"
+            children: [
+                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                    className: "mb-3",
+                    controlId: "formBasicUsername",
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 175
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 176
+                            },
+                            __self: this,
+                            children: "Username"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                            type: "text",
+                            value: this.state.Username,
+                            onChange: (e)=>this.setState({
+                                    Username: e.target.value
                                 })
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsx(_accordionDefault.default.Body, {
-                                className: "full-white w-100",
-                                __source: {
-                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 181
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form, {
-                                    noValidate: true,
-                                    validated: validated,
-                                    className: "update-form",
-                                    onSubmit: (e)=>this.handleUpdate(e)
-                                    ,
+                            ,
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 177
+                            },
+                            __self: this
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                    className: "mb-3",
+                    controlId: "formBasicPassword",
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 184
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 185
+                            },
+                            __self: this,
+                            children: "Password"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                            type: "password",
+                            value: this.state.Password,
+                            onChange: (e)=>this.setState({
+                                    Password: e.target.value
+                                })
+                            ,
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 186
+                            },
+                            __self: this
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                    className: "mb-3",
+                    controlId: "formBasicEmail",
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 193
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 194
+                            },
+                            __self: this,
+                            children: "Email address"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                            type: "email",
+                            value: this.state.Email,
+                            onChange: (e)=>this.setState({
+                                    Email: e.target.value
+                                })
+                            ,
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 195
+                            },
+                            __self: this
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Form.Group, {
+                    className: "mb-3",
+                    controlId: "formBasicBirthdate",
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 202
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Label, {
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 203
+                            },
+                            __self: this,
+                            children: "Birthdate"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
+                            type: "date",
+                            value: this.state.Birthdate,
+                            onChange: (e)=>this.setState({
+                                    Birthdate: e.target.value
+                                })
+                            ,
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 204
+                            },
+                            __self: this
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 211
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                            className: "mx-3 mt-2",
+                            type: "submit",
+                            variant: "outline-light",
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 212
+                            },
+                            __self: this,
+                            children: "Update"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
+                            className: "mx-3 mt-2",
+                            variant: "outline-danger",
+                            onClick: (e)=>this.handleDeleteUser(e)
+                            ,
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 215
+                            },
+                            __self: this,
+                            children: "Delete Account"
+                        })
+                    ]
+                }),
+                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card, {
+                    style: {
+                        width: "18rem"
+                    },
+                    __source: {
+                        fileName: "src/components/profile-view/profile-view.jsx",
+                        lineNumber: 224
+                    },
+                    __self: this,
+                    children: [
+                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Card.Title, {
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 225
+                            },
+                            __self: this,
+                            children: "Card Title"
+                        }),
+                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
+                            className: "text-center full-black",
+                            sm: 12,
+                            md: 6,
+                            __source: {
+                                fileName: "src/components/profile-view/profile-view.jsx",
+                                lineNumber: 226
+                            },
+                            __self: this,
+                            children: [
+                                (FavoriteMovies || []).length === 0 && /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                    className: "text-center text-light m-auto",
                                     __source: {
                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 182
+                                        lineNumber: 228
                                     },
                                     __self: this,
-                                    children: [
-                                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Row, {
+                                    children: "No favorites yet!"
+                                }),
+                                /*#__PURE__*/ _jsxRuntime.jsx("div", {
+                                    className: "favorite-movies d-flex justify-content-center ",
+                                    __source: {
+                                        fileName: "src/components/profile-view/profile-view.jsx",
+                                        lineNumber: 232
+                                    },
+                                    __self: this,
+                                    children: FavoriteMovies.length > 0 && movies.map((movie)=>{
+                                        if (movie._id === FavoriteMovies.find((favoriteMovie)=>favoriteMovie === movie._id
+                                        )) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                            className: "text-center justify-content-center",
                                             __source: {
                                                 fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 188
+                                                lineNumber: 242
                                             },
                                             __self: this,
-                                            children: [
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
-                                                    className: "mb-3",
-                                                    controlId: "formBasicUsername",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 189
-                                                    },
-                                                    __self: this,
-                                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.FloatingLabel, {
-                                                        controlId: "username",
-                                                        label: "Username",
-                                                        __source: {
-                                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 190
-                                                        },
-                                                        __self: this,
-                                                        children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
-                                                            type: "text",
-                                                            value: this.state.Username,
-                                                            onChange: (e)=>this.setState({
-                                                                    Username: e.target.value
-                                                                })
-                                                            ,
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 191
-                                                            },
-                                                            __self: this
-                                                        })
-                                                    })
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Col, {
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 200
-                                                    },
-                                                    __self: this,
-                                                    children: [
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
-                                                            className: "mb-3",
-                                                            controlId: "formBasicPassword",
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 201
-                                                            },
-                                                            __self: this,
-                                                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.FloatingLabel, {
-                                                                controlId: "password",
-                                                                label: "Password",
-                                                                __source: {
-                                                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                                                    lineNumber: 202
-                                                                },
-                                                                __self: this,
-                                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
-                                                                    type: "password",
-                                                                    value: this.state.Password,
-                                                                    onChange: (e)=>this.setState({
-                                                                            Password: e.target.value
-                                                                        })
-                                                                    ,
-                                                                    __source: {
-                                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                                        lineNumber: 203
-                                                                    },
-                                                                    __self: this
-                                                                })
-                                                            })
-                                                        }),
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
-                                                            className: "mb-3",
-                                                            controlId: "formBasicEmail",
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 212
-                                                            },
-                                                            __self: this,
-                                                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.FloatingLabel, {
-                                                                controlId: "email",
-                                                                label: "Email address",
-                                                                __source: {
-                                                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                                                    lineNumber: 213
-                                                                },
-                                                                __self: this,
-                                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
-                                                                    type: "email",
-                                                                    value: this.state.Email,
-                                                                    onChange: (e)=>this.setState({
-                                                                            Email: e.target.value
-                                                                        })
-                                                                    ,
-                                                                    __source: {
-                                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                                        lineNumber: 214
-                                                                    },
-                                                                    __self: this
-                                                                })
-                                                            })
-                                                        }),
-                                                        /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Group, {
-                                                            className: "mb-3",
-                                                            controlId: "formBasicBirthdate",
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 223
-                                                            },
-                                                            __self: this,
-                                                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.FloatingLabel, {
-                                                                controlId: "birthdate",
-                                                                label: "Date of Birth",
-                                                                __source: {
-                                                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                                                    lineNumber: 224
-                                                                },
-                                                                __self: this,
-                                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Form.Control, {
-                                                                    type: "date",
-                                                                    value: this.state.Birthdate,
-                                                                    onChange: (e)=>this.setState({
-                                                                            Birthdate: e.target.value
-                                                                        })
-                                                                    ,
-                                                                    __source: {
-                                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                                        lineNumber: 228
-                                                                    },
-                                                                    __self: this
-                                                                })
-                                                            })
-                                                        })
-                                                    ]
-                                                })
-                                            ]
-                                        }),
-                                        /*#__PURE__*/ _jsxRuntime.jsxs(_reactBootstrap.Card.Body, {
-                                            __source: {
-                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                lineNumber: 239
-                                            },
-                                            __self: this,
-                                            children: [
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                                    className: "mx-3 mt-2",
-                                                    type: "submit",
-                                                    variant: "outline-light",
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 240
-                                                    },
-                                                    __self: this,
-                                                    children: "Update"
-                                                }),
-                                                /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Button, {
-                                                    className: "mx-3 mt-2",
-                                                    variant: "outline-danger",
-                                                    onClick: (e)=>this.handleDeleteUser(e)
-                                                    ,
-                                                    __source: {
-                                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 247
-                                                    },
-                                                    __self: this,
-                                                    children: "Delete Account"
-                                                })
-                                            ]
-                                        })
-                                    ]
-                                })
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ _jsxRuntime.jsxs(_accordionDefault.default.Item, {
-                        style: {
-                            backgroundColor: "black"
-                        },
-                        eventKey: "1",
-                        __source: {
-                            fileName: "src/components/profile-view/profile-view.jsx",
-                            lineNumber: 258
-                        },
-                        __self: this,
-                        children: [
-                            /*#__PURE__*/ _jsxRuntime.jsx(_accordionDefault.default.Header, {
-                                className: "text-light full-black mt-md-5",
-                                __source: {
-                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 259
-                                },
-                                __self: this,
-                                children: /*#__PURE__*/ _jsxRuntime.jsx("h3", {
-                                    className: "m-auto black-text",
-                                    __source: {
-                                        fileName: "src/components/profile-view/profile-view.jsx",
-                                        lineNumber: 260
-                                    },
-                                    __self: this,
-                                    children: "Favorites"
-                                })
-                            }),
-                            /*#__PURE__*/ _jsxRuntime.jsxs(_accordionDefault.default.Body, {
-                                className: "text-center full-black",
-                                sm: 12,
-                                md: 6,
-                                __source: {
-                                    fileName: "src/components/profile-view/profile-view.jsx",
-                                    lineNumber: 262
-                                },
-                                __self: this,
-                                children: [
-                                    (FavoriteMovies || []).length === 0 && /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                                        className: "text-center text-light m-auto",
-                                        __source: {
-                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 264
-                                        },
-                                        __self: this,
-                                        children: "You don`t have favorite movies yet!"
-                                    }),
-                                    /*#__PURE__*/ _jsxRuntime.jsx("div", {
-                                        className: "favorite-movies d-flex justify-content-center ",
-                                        __source: {
-                                            fileName: "src/components/profile-view/profile-view.jsx",
-                                            lineNumber: 268
-                                        },
-                                        __self: this,
-                                        children: FavoriteMovies.length > 0 && movies.map((movie)=>{
-                                            if (movie._id === FavoriteMovies.find((favoriteMovie)=>favoriteMovie === movie._id
-                                            )) return(/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                                                className: "text-center justify-content-center",
+                                            children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
+                                                className: "text-light",
                                                 __source: {
                                                     fileName: "src/components/profile-view/profile-view.jsx",
-                                                    lineNumber: 278
+                                                    lineNumber: 243
                                                 },
                                                 __self: this,
-                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Row, {
-                                                    className: "text-light",
+                                                children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
+                                                    className: "m-auto image-container-profile",
+                                                    sm: 12,
+                                                    md: 6,
+                                                    lg: 5,
                                                     __source: {
                                                         fileName: "src/components/profile-view/profile-view.jsx",
-                                                        lineNumber: 279
+                                                        lineNumber: 244
                                                     },
                                                     __self: this,
-                                                    children: /*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                                                        className: "m-auto image-container-profile",
-                                                        sm: 12,
-                                                        md: 6,
-                                                        lg: 5,
+                                                    children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
+                                                        className: "movieCard",
+                                                        src: movie.ImagePath,
                                                         __source: {
                                                             fileName: "src/components/profile-view/profile-view.jsx",
-                                                            lineNumber: 280
+                                                            lineNumber: 250
                                                         },
-                                                        __self: this,
-                                                        children: /*#__PURE__*/ _jsxRuntime.jsx("img", {
-                                                            className: "movieCard",
-                                                            src: movie.ImagePath,
-                                                            __source: {
-                                                                fileName: "src/components/profile-view/profile-view.jsx",
-                                                                lineNumber: 286
-                                                            },
-                                                            __self: this
-                                                        })
+                                                        __self: this
                                                     })
-                                                }, movie._id)
-                                            }));
-                                        })
+                                                })
+                                            }, movie._id)
+                                        }));
                                     })
-                                ]
-                            })
-                        ]
-                    })
-                ]
-            })
+                                })
+                            ]
+                        })
+                    ]
+                })
+            ]
         }));
     }
 }
@@ -42279,7 +42191,7 @@ ProfileView.propTypes = {
   window.$RefreshReg$ = prevRefreshReg;
   window.$RefreshSig$ = prevRefreshSig;
 }
-},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","axios":"iYoWk","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","react-bootstrap/Accordion":"4CUf9","./profile-view.scss":"gb0ga"}],"gb0ga":[function() {},{}],"ck15y":[function(require,module,exports) {
+},{"react/jsx-runtime":"8xIwr","react":"6TuXu","prop-types":"1tgq3","axios":"iYoWk","react-bootstrap":"h2YVd","@parcel/transformer-js/src/esmodule-helpers.js":"JacNc","@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"5V79J","./profile-view.scss":"gb0ga"}],"gb0ga":[function() {},{}],"ck15y":[function(require,module,exports) {
 var $parcel$ReactRefreshHelpers$f8cc = require("@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
