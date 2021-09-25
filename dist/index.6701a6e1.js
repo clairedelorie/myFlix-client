@@ -46428,7 +46428,7 @@ function MoviesList(props) {
                 })
             }),
             filteredMovies.map((m)=>/*#__PURE__*/ _jsxRuntime.jsx(_reactBootstrap.Col, {
-                    className: "sm{4} py-2 ",
+                    className: "sm{4} py-2",
                     __source: {
                         fileName: "src/components/movies-list/movies-list.jsx",
                         lineNumber: 35
