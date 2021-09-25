@@ -1,4 +1,12 @@
-// change the theme
-// $theme-colors: (
-//   "danger": #fecc50,
-// );
+.form {
+  font-family: "Poppins", sans-serif;
+  font-size: 13pt;
+  font-weight: 300;
+  color: #5e6668;
+  margin: 0 auto;
+  padding: 5px;
+}
+
+.btn {
+  background-color: #204429;
+}

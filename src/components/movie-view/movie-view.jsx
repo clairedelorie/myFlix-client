@@ -41,7 +41,7 @@ export default class MovieView extends React.Component {
           </div>
 
           <Button
-            varient="danger"
+            varient="primary"
             onClick={() => {
               onBackClick(null);
             }}
@@ -58,7 +58,7 @@ MovieView.propTypes = {
   movie: propTypes.shape({
     Title: propTypes.string.isRequired,
     Description: propTypes.string.isRequired,
-    ImageURL: propTypes.string.isRequired,
+    Image: propTypes.string.isRequired,
     Genre: propTypes.shape({
       Name: propTypes.string.isRequired,
     }),

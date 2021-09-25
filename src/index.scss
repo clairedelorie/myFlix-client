@@ -1,9 +1,29 @@
-*,
 .app-container {
-  background-color: #1e0521;
-  color: #ff6d69;
+  background-color: #f6fafb;
+  color: #5e6668;
 }
 
 body {
   margin: 0%;
+  background-color: #f6fafb;
+}
+
+.btn {
+  font-family: "Poppins", sans-serif;
+  min-width: 150px;
+  font-size: 14pt !important;
+  height: 45px;
+  margin: 5px;
+}
+
+.btn.btn-primary {
+  background-color: #d49c6b;
+  color: white;
+  border-color: #252b31;
+}
+
+.btn.btn-secondary {
+  background-color: #204429;
+  color: white;
+  border-color: #252b31;
 }

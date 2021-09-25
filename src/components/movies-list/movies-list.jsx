@@ -26,17 +26,15 @@ function MoviesList(props) {
 
   return (
     <>
-      <Col className="filter-input m-auto mb-3 px-0">
-        <VisibilityFilterInput visibilityFilter={visibilityFilter} />
-      </Col>
+      <Container>
+        <Col className="filter-input m-auto mb-3 px-0">
+          <VisibilityFilterInput visibilityFilter={visibilityFilter} />
+        </Col>
+      </Container>
       {filteredMovies.map((m) => (
-        <Container>
-          <Col>
-            <Row>
-              <MovieCard movie={m} />
-            </Row>
-          </Col>
-        </Container>
+        <Col className="sm{4} py-2 " key={m._id}>
+          <MovieCard movie={m} />
+        </Col>
       ))}
     </>
   );

@@ -8,10 +8,21 @@
   padding: 1.5%;
   border-radius: 10px;
 }
+.form {
+  font-family: "Poppins", sans-serif;
+  font-size: 13pt;
+  font-weight: 300;
+  color: #5e6668;
+  margin: 0 auto;
+  padding: 5px;
+}
 
+.btn {
+  background-color: #204429;
+}
 form {
+  display: block;
   text-align: center;
-  width: 300px;
   margin: auto;
   padding: 1.5%;
   border-radius: 10px;
@@ -24,30 +35,97 @@ form {
   margin-top: 1%;
   margin-bottom: auto;
 }
-.profile-view {
+
+.reg-form-text1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 13pt;
+  font-weight: 300;
+  color: #5e6668;
+  margin: 0 auto;
+  padding: 5px;
+}
+.profile-view_wrapper {
+  margin: 0 auto;
+  padding: 10px;
+  text-align: center;
+}
+
+.profile-view_headers {
   padding: 30px;
-  border-radius: 15px;
+  font-family: "Poppins", sans-serif;
+  font-weight: 300;
+  color: #252b31;
+  text-transform: uppercase;
+}
+
+.profile-form {
+  background-color: #f6fafb;
+  max-width: 600px;
+  margin: 0 auto;
+  border: 1px solid #252b31;
+  border-radius: 5px;
+  color: #5e6668;
+  font-family: "Poppins", sans-serif;
+  font-size: 14pt !important;
+  font-weight: 200;
+  padding: 20px;
+}
+
+.profile-view_movie-card {
+  height: 250px;
+}
+
+.form-label {
+  text-align: right;
+  margin-bottom: 0 !important;
+}
+
+.profile-form_label {
+  text-align: right;
+  padding: 0.375rem 0;
 }
 .director-view {
   display: block;
-  width: 100%;
 }
 .genre-view {
   display: block;
 }
 
-*,
-body {
-  padding: 0%;
-  margin: 0%;
+.custom-link {
+  font-family: "Poppins", sans-serif;
+  color: #5e6668 !important;
 }
-*,
+
+.logout-btn {
+  background-color: #204429 !important;
+}
 .app-container {
-  background-color: #1e0521;
-  color: #ff6d69;
+  background-color: #f6fafb;
+  color: #5e6668;
 }
 
 body {
   margin: 0%;
+  background-color: #f6fafb;
+}
+
+.btn {
+  font-family: "Poppins", sans-serif;
+  min-width: 150px;
+  font-size: 14pt !important;
+  height: 45px;
+  margin: 5px;
+}
+
+.btn.btn-primary {
+  background-color: #d49c6b;
+  color: white;
+  border-color: #252b31;
+}
+
+.btn.btn-secondary {
+  background-color: #204429;
+  color: white;
+  border-color: #252b31;
 }
 /*# sourceMappingURL=index.c1e31cef.css.map */

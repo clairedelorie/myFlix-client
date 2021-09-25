@@ -20,15 +20,12 @@ import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 import MoviesList from "../movies-list/movies-list";
 
-import { Row, Col, Navbar, Nav, Button } from "react-bootstrap";
+import { Row, Col, Navbar, Nav, Button, Card } from "react-bootstrap";
 import "./main-view.scss";
 
 class MainView extends React.Component {
   constructor() {
     super();
-    this.state = {
-      user: null,
-    };
   }
 
   componentDidMount() {
@@ -85,9 +82,7 @@ class MainView extends React.Component {
 
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-
-    console.log("logged out");
-    window.open("/", "_self");
+    this.props.setUser(null);
   }
 
   render() {
@@ -100,34 +95,45 @@ class MainView extends React.Component {
           collapseOnSelect
           expand="xxl"
           sticky="top"
-          variant="dark"
+          variant="light"
         >
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="nav-link">
-              <Link className="custom-link mx-3" to={`/`}>
-                Movies
+          <Container>
+            <NavbarBrand>
+              <Link to={"/"}>
+                <h1 className="myFlix-title">myFlix</h1>
               </Link>
-              <Link className="custom-link mx-3" to={`/directors`}>
-                Directors
-              </Link>
-              <Link className="custom-link mx-3" to={`/genres`}>
-                Genres
-              </Link>
-              <Link className="custom-link mx-3" to={"/profile"}>
-                Profile
-              </Link>
-            </Nav>
-            <Button
-              className="logout-button mx-3"
-              variant="danger"
-              onClick={() => {
-                this.onLoggedOut();
-              }}
+            </NavbarBrand>
+
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse
+              id="responsive-navbar-nav"
+              className="justify-content-end"
             >
-              Logout
-            </Button>
-          </Navbar.Collapse>
+              <Nav className="nav-link">
+                <Link className="custom-link mx-3" to={`/`}>
+                  Movies
+                </Link>
+                <Link className="custom-link mx-3" to={`/directors`}>
+                  Directors
+                </Link>
+                <Link className="custom-link mx-3" to={`/genres`}>
+                  Genres
+                </Link>
+                <Link className="custom-link mx-3" to={"/users/:Username"}>
+                  Profile
+                </Link>
+              </Nav>
+              <Button
+                className="logout-btn mx-3"
+                variant="secondary"
+                onClick={() => {
+                  this.onLoggedOut();
+                }}
+              >
+                Logout
+              </Button>
+            </Navbar.Collapse>
+          </Container>
         </Navbar>
 
         <Row className="main-view justify-content-center">
@@ -161,23 +167,23 @@ class MainView extends React.Component {
 
           <Route
             exact
-            path="/users/:username"
+            path="/users/:Username"
             render={({ history }) => {
               if (!user)
                 return (
-                  <LoginView onLoggedIn={(data) => this.onLoggedIn(data)} />
+                  <Col>
+                    <LoginView
+                      onLoggedIn={(data) => this.onLoggedIn(data)}
+                      onRegisterClick={(register) =>
+                        this.onRegisterClick(register)
+                      }
+                    />
+                  </Col>
                 );
-              if (movies.length === 0) return;
-              return <ProfileView history={history} movies={movies} />;
-            }}
-          />
-
-          <Route
-            path="/profile"
-            render={() => {
+              if (movies.length === 0) return <div className="main-view" />;
               return (
                 <Col>
-                  <ProfileView />
+                  <ProfileView history={history} movies={movies} />
                 </Col>
               );
             }}
@@ -219,7 +225,7 @@ class MainView extends React.Component {
           <Route
             exact
             path="/genres"
-            render={({ match, history }) => {
+            render={() => {
               if (movies.length === 0) return <div className="main-view" />;
               return (
                 <Col md={8}>
@@ -232,10 +238,16 @@ class MainView extends React.Component {
                       []
                     )
                     .map((g) => (
-                      <div>
-                        <h2>{g.Name}</h2>
-                        <p>{g.Description}</p>
-                      </div>
+                      <Card className="m-4">
+                        <Card.Body>
+                          <Card.Title className="text-center">
+                            {g.Name}
+                          </Card.Title>
+                          <Card.Text className=" text-center">
+                            {g.Description}
+                          </Card.Text>
+                        </Card.Body>
+                      </Card>
                     ))}
                 </Col>
               );
@@ -247,7 +259,7 @@ class MainView extends React.Component {
             render={({ match, history }) => {
               if (movies.length === 0) return <div className="main-view" />;
               return (
-                <Col>
+                <Col md={8}>
                   <DirectorView
                     director={
                       movies.find((m) => m.Director.Name === match.params.name)
@@ -261,11 +273,12 @@ class MainView extends React.Component {
           />
 
           <Route
+            exact
             path="/directors"
-            render={({ match, history }) => {
+            render={() => {
               if (movies.length === 0) return <div className="main-view" />;
               return (
-                <Col>
+                <Col md={8}>
                   {movies
                     .reduce(
                       (directors, movie) =>
@@ -275,10 +288,17 @@ class MainView extends React.Component {
                       []
                     )
                     .map((d) => (
-                      <div>
-                        <h2>{d.Name}</h2>
-                        <p>{d.Bio}</p>
-                      </div>
+                      <Card className="m-4">
+                        <Card.Body>
+                          <Card.Title className="text-center">
+                            {d.Name}
+                          </Card.Title>
+                          <Card.Text className=" text-center">
+                            {d.Bio}
+                          </Card.Text>
+                          <Card.Text>{d.Birthdate}</Card.Text>
+                        </Card.Body>
+                      </Card>
                     ))}
                 </Col>
               );

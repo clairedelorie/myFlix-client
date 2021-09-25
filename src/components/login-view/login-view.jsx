@@ -30,12 +30,12 @@ export function LoginView(props) {
   return (
     <Container>
       <Col xs={12} md={8} lg={6} className="d-flex mx-auto">
-        <Row className="d-flex mx-auto mt-5 justify-content-center">
+        <Row className=" mx-auto mt-5 justify-content-center">
           <div className="text-center mt-5 login-view">
-            <h2>Welcome to MyFlix</h2>
+            <h1>Welcome to MyFlix</h1>
 
             <Form>
-              <Form.Group controlId="formUsername">
+              <Form.Group className="m-2" controlId="formUsername">
                 <Form.Control
                   type="text"
                   placeholder="Enter Username"
@@ -44,7 +44,7 @@ export function LoginView(props) {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formPassword">
+              <Form.Group className="m-2" controlId="formPassword">
                 <Form.Control
                   type="password"
                   placeholder="Enter Password"
@@ -53,18 +53,18 @@ export function LoginView(props) {
                 />
               </Form.Group>
 
-              <Button variant="danger" type="submit" onClick={handleSubmit}>
+              <Button variant="secondary" type="submit" onClick={handleSubmit}>
                 Login
               </Button>
             </Form>
 
-            <Col className="mt-5 w-100 d-flex">
+            <Col className="mt-5 w-100 ">
               <h4>Don't have an account?</h4>
 
               <Link to="/register">
                 <Button
-                  className="w-auto pb-2 py-0  d-flex"
-                  varient="danger"
+                  className="w-auto pb-2 py-0 "
+                  varient="primary"
                   type="button"
                 >
                   Sign up

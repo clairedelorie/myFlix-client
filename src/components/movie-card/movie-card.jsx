@@ -9,11 +9,11 @@ export class MovieCard extends React.Component {
     const { movie } = this.props;
 
     return (
-      <Card className="bg-dark text-white">
+      <Card border="light" style={{ width: "18rem" }} className=" movieCard">
         <Card.Body>
-          <Card.Title>{movie.Title}</Card.Title>
           <Card.Img src={movie.ImagePath} />
           <br></br>
+          <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>
             {movie.Description}
             <Link to={`/movies/${movie._id}`}>

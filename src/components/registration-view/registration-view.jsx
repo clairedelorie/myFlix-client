@@ -17,7 +17,7 @@ export default function RegistrationView() {
         Username: username,
         Password: password,
         Email: email,
-        Birthday: birthday,
+        Birthdate: birthdate,
       })
       .then((response) => {
         const data = response.data;
@@ -34,10 +34,10 @@ export default function RegistrationView() {
       <Col xs={12} md={8} lg={6} className="d-flex mx-auto">
         <Row className="d-flex mx-auto mt-5 justify-content-center">
           <div className="text-center mt-5 login-view">
-            <h2>Create a myFlix Account</h2>
+            <h1>Create a myFlix Account</h1>
 
             <Form>
-              <Form.Group controlId="formGroupUsername">
+              <Form.Group className="m-2" controlId="formGroupUsername">
                 <Form.Control
                   type="text"
                   placeholder="Enter Username"
@@ -46,7 +46,7 @@ export default function RegistrationView() {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formGroupPassword">
+              <Form.Group className="m-2" controlId="formGroupPassword">
                 <Form.Control
                   type="password"
                   placeholder="Enter Password"
@@ -55,7 +55,7 @@ export default function RegistrationView() {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formGroupEmail">
+              <Form.Group className="m-2" controlId="formGroupEmail">
                 <Form.Control
                   type="email"
                   placeholder="Enter Email"
@@ -64,7 +64,7 @@ export default function RegistrationView() {
                 />
               </Form.Group>
 
-              <Form.Group controlId="formGroupBirthdate">
+              <Form.Group className="m-2" controlId="formGroupBirthdate">
                 <Form.Control
                   type="date"
                   placeholder="00-00-0000"
@@ -73,9 +73,12 @@ export default function RegistrationView() {
                 />
               </Form.Group>
 
-              <Button varient="danger" onClick={handleSubmit}>
+              <Button varient="secondary" onClick={handleSubmit}>
                 Sign up!
               </Button>
+              <Link to={"/"}>
+                <Button variant="secondary">Back</Button>
+              </Link>
             </Form>
           </div>
         </Row>
