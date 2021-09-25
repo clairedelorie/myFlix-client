@@ -20,7 +20,15 @@ import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 import MoviesList from "../movies-list/movies-list";
 
-import { Row, Col, Navbar, Nav, Button, Card } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Navbar,
+  Nav,
+  Button,
+  Card,
+  Container,
+} from "react-bootstrap";
 import "./main-view.scss";
 
 class MainView extends React.Component {
