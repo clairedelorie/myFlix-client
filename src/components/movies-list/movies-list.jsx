@@ -32,7 +32,7 @@ function MoviesList(props) {
         </Col>
       </Container>
       {filteredMovies.map((m) => (
-        <Col className="sm{4} py-2 " key={m._id}>
+        <Col className="sm{4} py-2" key={m._id}>
           <MovieCard movie={m} />
         </Col>
       ))}
