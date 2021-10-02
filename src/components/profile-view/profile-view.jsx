@@ -301,16 +301,10 @@ export class ProfileView extends React.Component {
                         variant="light"
                         className="profile-view_movie-card"
                       >
-                        <Card.Img variant="top" src={movie.ImageURL} />
+                        <Card.Img variant="top" src={movie.Image} />
                         <Card.Body>
                           <Card.Title>
-                            <h5 className="movie-card_title">
-                              {movie.Name}{" "}
-                              <span className="movie-card_year">
-                                {" "}
-                                {moment(movie.Year).format("YYYY")}
-                              </span>
-                            </h5>
+                            <h5 className="movie-card_title">{movie.Title} </h5>
                           </Card.Title>
                         </Card.Body>
                       </Card>
