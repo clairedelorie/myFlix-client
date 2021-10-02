@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel serve C:\\Users\\delor\\Documents\\careerfoundry\\myFlix-client\\src\\index.html",
-    "build": "babel src -d build"
+    "build": "parcel build src/index.html"
   },
   "author": "",
   "license": "ISC",
