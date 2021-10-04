@@ -15,7 +15,7 @@ import { setUser, setMovies, setFilter } from "../../actions/actions";
 import MovieView from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import RegistrationView from "../registration-view/registration-view";
-import { ProfileView } from "../profile-view/profile-view";
+import ProfileView from "../profile-view/profile-view";
 import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 import MoviesList from "../movies-list/movies-list";
@@ -35,12 +35,14 @@ import "./main-view.scss";
 class MainView extends React.Component {
   constructor() {
     super();
+    this.state = { loggedIn: false };
   }
 
   componentDidMount() {
     const accesstoken = localStorage.getItem("token");
     const username = localStorage.getItem("user");
     if (accesstoken !== null) {
+      this.setState({ loggedIn: true });
       Promise.all([
         this.getUser(username, accesstoken),
         this.getMovies(accesstoken),
@@ -95,7 +97,11 @@ class MainView extends React.Component {
   }
 
   render() {
+    const { loggedIn } = this.state;
     const { movies, user } = this.props;
+
+    if (loggedIn && movies.length == 0 && user == null)
+      return <div>Loading...</div>;
 
     return (
       <Router>
@@ -114,34 +120,39 @@ class MainView extends React.Component {
             </NavbarBrand>
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse
-              id="responsive-navbar-nav"
-              className="justify-content-end"
-            >
-              <Nav className="nav-link">
-                <Link className="custom-link mx-3" to={`/`}>
-                  Movies
-                </Link>
-                <Link className="custom-link mx-3" to={`/directors`}>
-                  Directors
-                </Link>
-                <Link className="custom-link mx-3" to={`/genres`}>
-                  Genres
-                </Link>
-                <Link className="custom-link mx-3" to={"/users/:Username"}>
-                  Profile
-                </Link>
-              </Nav>
-              <Button
-                className="logout-btn mx-3"
-                variant="secondary"
-                onClick={() => {
-                  this.onLoggedOut();
-                }}
+            {loggedIn && user && (
+              <Navbar.Collapse
+                id="responsive-navbar-nav"
+                className="justify-content-end"
               >
-                Logout
-              </Button>
-            </Navbar.Collapse>
+                <Nav className="nav-link">
+                  <Link className="custom-link mx-3" to={`/`}>
+                    Movies
+                  </Link>
+                  <Link className="custom-link mx-3" to={`/directors`}>
+                    Directors
+                  </Link>
+                  <Link className="custom-link mx-3" to={`/genres`}>
+                    Genres
+                  </Link>
+                  <Link
+                    className="custom-link mx-3"
+                    to={`/users/${user.Username}`}
+                  >
+                    Profile
+                  </Link>
+                </Nav>
+                <Button
+                  className="logout-btn mx-3"
+                  variant="secondary"
+                  onClick={() => {
+                    this.onLoggedOut();
+                  }}
+                >
+                  Logout
+                </Button>
+              </Navbar.Collapse>
+            )}
           </Container>
         </Navbar>
 
@@ -204,6 +215,7 @@ class MainView extends React.Component {
               return (
                 <Col md={8}>
                   <MovieView
+                    FavoriteMovies={user.FavoriteMovies}
                     movie={movies.find((m) => m._id === match.params.movieId)}
                     onBackClick={() => history.goBack()}
                   />

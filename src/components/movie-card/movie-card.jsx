@@ -11,7 +11,7 @@ export class MovieCard extends React.Component {
     return (
       <Card border="light" style={{ width: "18rem" }} className=" movieCard">
         <Card.Body>
-          <Card.Img src={movie.ImagePath} />
+          <Card.Img src={movie.ImagePath} width="254" height="377" />
           <br></br>
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>

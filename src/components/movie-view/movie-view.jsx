@@ -3,45 +3,18 @@ import { Button, Row, Col } from "react-bootstrap";
 import propTypes from "prop-types";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { setUser } from "../../actions/actions";
 
 import "./movie-view.scss";
+import { connect } from "react-redux";
 
-export default class MovieView extends React.Component {
+export class MovieView extends React.Component {
   constructor() {
     super();
     //initial state is set to null
     this.state = {
       FavoriteMovies: [],
     };
-  }
-
-  componentDidMount() {
-    const accessToken = localStorage.getItem("token");
-    this.getFavorites(accessToken);
-  }
-
-  componentDidUpdate(FavoriteMovies) {
-    const accessToken = localStorage.getItem("token");
-    this.getFavorites(accessToken);
-  }
-
-  //get favorite movies
-  getFavorites(token) {
-    const username = localStorage.getItem("user");
-    const FavoriteMovies = this.state;
-
-    axios
-      .get(`https://boiling-savannah-13307.herokuapp.com/users/${username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        this.setState({
-          FavoriteMovies: response.data.FavoriteMovies,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
   }
 
   // when a user favorites a movie, add it to their favorites list via POST action to API
@@ -57,7 +30,9 @@ export default class MovieView extends React.Component {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .then((response) => {})
+      .then((response) => {
+        this.props.setUser(response.data);
+      })
       .catch(function (error) {
         console.log(error);
       });
@@ -75,15 +50,16 @@ export default class MovieView extends React.Component {
           headers: { Authorization: `Bearer ${token}` },
         }
       )
-      .then((response) => {})
+      .then((response) => {
+        this.props.setUser(response.data);
+      })
       .catch(function (error) {
         console.log(error);
       });
   }
 
   render() {
-    const { movie, onBackClick } = this.props;
-    const { FavoriteMovies } = this.state;
+    const { FavoriteMovies, movie, onBackClick } = this.props;
 
     return (
       <Row className="movie-view mt-5 m-auto ">
@@ -173,3 +149,9 @@ MovieView.propTypes = {
     ),
   }),
 };
+
+const mapStateToProps = (state) => {
+  return { user: state.user };
+};
+
+export default connect(mapStateToProps, { setUser })(MovieView);

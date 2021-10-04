@@ -76,8 +76,8 @@ export class ProfileView extends React.Component {
         .then((response) => {
           const data = response.data;
           console.log(data);
+          this.props.setUser(response.data);
           alert("Your information has been updated!");
-          window.open(`/`, "_self");
         })
         .catch((e) => {
           console.log("Error updating user information");
@@ -118,31 +118,6 @@ export class ProfileView extends React.Component {
     return isValid;
   }
 
-  componentDidMount() {
-    const accessToken = localStorage.getItem("token");
-    this.getUser(accessToken);
-  }
-
-  //get user information by username
-  getUser(token) {
-    const username = localStorage.getItem("user");
-    axios
-      .get(`https://boiling-savannah-13307.herokuapp.com/users/${username}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        this.setState({
-          Username: response.data.Username,
-          Email: response.data.Email,
-          Birthday: moment(response.data.Birthday).format("YYYY-MM-DD"),
-          FavoriteMovies: response.data.FavoriteMovies,
-        });
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  }
-
   //allow a user to delete their account
   handleDeleteUser = (e) => {
     e.preventDefault();
@@ -162,6 +137,7 @@ export class ProfileView extends React.Component {
           localStorage.removeItem("user");
           localStorage.removeItem("token");
           alert("Your account has been deleted.");
+          this.props.setUser(null);
           window.open(`/`, "_self");
         })
         .catch((e) => {
@@ -172,13 +148,18 @@ export class ProfileView extends React.Component {
 
   render() {
     const { FavoriteMovies } = this.state;
-    const { movies } = this.props;
+    const { movies, user } = this.props;
     const { UsernameError, PasswordError, EmailError, BirthdayError } =
       this.state;
 
+    const username = user.Username;
+    const email = user.Email;
+    const favoriteMovies = user.FavoriteMovies;
+    const birthday = moment(user.Birthday).format("YYYY-MM-DD");
+
     return (
       <div className="profile-view_wrapper">
-        <h3 className="profile-view_headers"> Hello, {this.state.Username}!</h3>
+        <h3 className="profile-view_headers"> Hello, {username}!</h3>
 
         <Form className="profile-form">
           <Row className="profile-form_row">
@@ -196,7 +177,7 @@ export class ProfileView extends React.Component {
               <Form.Control
                 required
                 type="text"
-                placeholder={this.state.Email}
+                placeholder={email}
                 onChange={this.onEmailChange}
               />
             </Col>
@@ -216,7 +197,7 @@ export class ProfileView extends React.Component {
               <Form.Control
                 required
                 type="text"
-                placeholder={this.state.Username}
+                placeholder={username}
                 onChange={this.onUsernameChange}
               />
             </Col>
@@ -256,7 +237,7 @@ export class ProfileView extends React.Component {
               <Form.Control
                 required
                 type="date"
-                defaultValue={this.state.Birthday}
+                defaultValue={birthday}
                 onChange={this.onBirthdayChange}
               />
             </Col>
@@ -281,37 +262,32 @@ export class ProfileView extends React.Component {
         </Form>
 
         <h3 className="profile-view_headers">Favorite Movies</h3>
-        {FavoriteMovies.length === 0 && (
+        {favoriteMovies.length === 0 && (
           <p>You have not added any movies to your list of favorites yet!</p>
         )}
         <Row xs={1} sm={2} md={3} className="g-4">
-          {FavoriteMovies.length > 0 &&
-            movies.map((movie) => {
-              if (
-                movie._id ===
-                FavoriteMovies.find(
-                  (favoriteMovie) => favoriteMovie === movie._id
-                )
-              ) {
-                return (
-                  <Col key={movie._id}>
-                    <Link to={`/movies/${movie._id}`}>
-                      <Card
-                        key={movie._id}
-                        variant="light"
-                        className="profile-view_movie-card"
-                      >
-                        <Card.Img variant="top" src={movie.Image} />
-                        <Card.Body>
-                          <Card.Title>
-                            <h5 className="movie-card_title">{movie.Title} </h5>
-                          </Card.Title>
-                        </Card.Body>
-                      </Card>
-                    </Link>
-                  </Col>
-                );
-              }
+          {favoriteMovies.length > 0 &&
+            favoriteMovies.map((movieId) => {
+              const movie = movies.find((m) => m._id == movieId);
+
+              return (
+                <Col key={movie._id}>
+                  <Link to={`/movies/${movie._id}`}>
+                    <Card
+                      key={movie._id}
+                      variant="light"
+                      className="profile-view_movie-card"
+                    >
+                      <Card.Img variant="top" src={movie.Image} />
+                      <Card.Body>
+                        <Card.Title>
+                          <h5 className="movie-card_title">{movie.Title} </h5>
+                        </Card.Title>
+                      </Card.Body>
+                    </Card>
+                  </Link>
+                </Col>
+              );
             })}
         </Row>
       </div>
@@ -321,8 +297,8 @@ export class ProfileView extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-    user: state.user,
     movies: state.movies,
+    user: state.user,
   };
 };
 
