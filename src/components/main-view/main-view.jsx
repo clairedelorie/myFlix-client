@@ -86,6 +86,7 @@ class MainView extends React.Component {
     localStorage.setItem("token", authData.token);
     localStorage.setItem("user", authData.user.Username);
     this.getMovies(authData.token);
+    this.setState({ loggedIn: true });
   }
 
   onLoggedOut() {
@@ -94,6 +95,7 @@ class MainView extends React.Component {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
     this.props.setUser(null);
+    this.setState({ loggedIn: false });
   }
 
   render() {
