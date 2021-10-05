@@ -23,6 +23,7 @@ export function LoginView(props) {
         props.onLoggedIn(data);
       })
       .catch((e) => {
+        alert("Something went wrong, are you registered?");
         console.log("no such user");
       });
   };
