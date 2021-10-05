@@ -16,8 +16,12 @@ export class MovieCard extends React.Component {
           <Card.Title>{movie.Title}</Card.Title>
           <Card.Text>
             {movie.Description}
-            <Link to={`/movies/${movie._id}`}>
-              <Button variant="link">Info</Button>
+            <br></br>
+            <Link
+              className="justify-content-center"
+              to={`/movies/${movie._id}`}
+            >
+              <Button variant="primary">Info</Button>
             </Link>
           </Card.Text>
         </Card.Body>
