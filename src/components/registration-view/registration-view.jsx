@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 import "./registration-view.scss";
 
@@ -8,7 +10,6 @@ export default function RegistrationView() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [birthdate, setBirthdate] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,7 +18,6 @@ export default function RegistrationView() {
         Username: username,
         Password: password,
         Email: email,
-        Birthdate: birthdate,
       })
       .then((response) => {
         const data = response.data;
@@ -64,15 +64,6 @@ export default function RegistrationView() {
                 />
               </Form.Group>
 
-              <Form.Group className="m-2" controlId="formGroupBirthdate">
-                <Form.Control
-                  type="date"
-                  placeholder="00-00-0000"
-                  value={birthdate}
-                  onChange={(e) => setBirthdate(e.target.value)}
-                />
-              </Form.Group>
-
               <Button varient="secondary" onClick={handleSubmit}>
                 Sign up!
               </Button>
@@ -92,6 +83,5 @@ RegistrationView.propTypes = {
     username: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
-    birthdate: PropTypes.string.isRequired,
   }),
 };
