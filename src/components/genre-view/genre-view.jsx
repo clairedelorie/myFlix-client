@@ -18,7 +18,7 @@ export function GenreView({ genre, onBackClick }) {
         </Row>
 
         <Button
-          variant="danger"
+          variant="secondary"
           onClick={() => {
             onBackClick(null);
           }}
