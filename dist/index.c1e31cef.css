@@ -3,8 +3,8 @@
   display: block;
   text-align: center;
   width: 90%;
-  height: 98vh;
-  margin: auto;
+  height: 100%;
+  margin: 0;
   padding: 1.5%;
   border-radius: 10px;
 }
@@ -13,8 +13,7 @@
   font-size: 13pt;
   font-weight: 300;
   color: #5e6668;
-  margin: 0 auto;
-  padding: 5px;
+  margin: auto;
 }
 
 .btn {
@@ -85,10 +84,24 @@ form {
   padding: 0.375rem 0;
 }
 .director-view {
+  box-sizing: border-box;
   display: block;
+  text-align: center;
+  width: 90%;
+  height: 98vh;
+  margin: auto;
+  padding: 1.5%;
+  border-radius: 10px;
 }
 .genre-view {
+  box-sizing: border-box;
   display: block;
+  text-align: center;
+  width: 90%;
+  height: 98vh;
+  margin: auto;
+  padding: 1.5%;
+  border-radius: 10px;
 }
 
 .custom-link {
