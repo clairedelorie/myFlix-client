@@ -15,19 +15,17 @@ export class ProfileView extends React.Component {
       Username: null,
       Password: null,
       Email: null,
-      Birthday: null,
+
       FavoriteMovies: [],
       UsernameError: "",
       PasswordError: "",
       EmailError: "",
-      BirthdayError: "",
     };
 
     //when user submits a change to the form, change user information
     this.onUsernameChange = this.onUsernameChange.bind(this);
     this.onPasswordChange = this.onPasswordChange.bind(this);
     this.onEmailChange = this.onEmailChange.bind(this);
-    this.onBirthdayChange = this.onBirthdayChange.bind(this);
     this.handleUpdateUser = this.handleUpdateUser.bind(this);
   }
 
@@ -49,12 +47,6 @@ export class ProfileView extends React.Component {
     });
   }
 
-  onBirthdayChange(event) {
-    this.setState({
-      Birthday: event.target.value,
-    });
-  }
-
   //when update form is submitted, PUT action with API
   handleUpdateUser = (e) => {
     e.preventDefault();
@@ -69,7 +61,6 @@ export class ProfileView extends React.Component {
             Username: this.state.Username,
             Password: this.state.Password,
             Email: this.state.Email,
-            Birthday: this.state.Birthday,
           },
           { headers: { Authorization: `Bearer ${token}` } }
         )
@@ -89,7 +80,6 @@ export class ProfileView extends React.Component {
     let UsernameError = {};
     let EmailError = {};
     let PasswordError = {};
-    let BirthdayError = {};
     let isValid = true;
     if (!(this.state.Username && this.state.Username.length > 4)) {
       UsernameError.notValidUsername =
@@ -105,15 +95,11 @@ export class ProfileView extends React.Component {
       EmailError.notValidEmail = "Please enter a valid email address.";
       isValid = false;
     }
-    if (!this.state.Birthday) {
-      BirthdayError.noBirthday = "Please enter your date of birth.";
-      isValid = false;
-    }
+
     this.setState({
       UsernameError: UsernameError,
       PasswordError: PasswordError,
       EmailError: EmailError,
-      BirthdayError: BirthdayError,
     });
     return isValid;
   }
@@ -155,7 +141,6 @@ export class ProfileView extends React.Component {
     const username = user.Username;
     const email = user.Email;
     const favoriteMovies = user.FavoriteMovies;
-    const birthday = moment(user.Birthday).format("YYYY-MM-DD");
 
     return (
       <div className="profile-view_wrapper">
@@ -219,26 +204,6 @@ export class ProfileView extends React.Component {
                 type="password"
                 placeholder=""
                 onChange={this.onPasswordChange}
-              />
-            </Col>
-          </Row>
-          <Row className="profile-form_row">
-            <Col sm="3" className="profile-form_label">
-              <Form.Label>Birthday</Form.Label>
-            </Col>
-            <Col sm="9">
-              {Object.keys(BirthdayError).map((key) => {
-                return (
-                  <div className="form-validation-error" key={key}>
-                    {BirthdayError[key]}
-                  </div>
-                );
-              })}
-              <Form.Control
-                required
-                type="date"
-                defaultValue={birthday}
-                onChange={this.onBirthdayChange}
               />
             </Col>
           </Row>
