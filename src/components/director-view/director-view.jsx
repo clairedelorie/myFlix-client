@@ -15,7 +15,7 @@ export function DirectorView({ director, onBackClick }) {
           </h1>
         </Row>
 
-        <Row className="text-light director-bio">
+        <Row className="text-center director-bio">
           <span className="value">{director.Bio}</span>
         </Row>
 
@@ -24,7 +24,7 @@ export function DirectorView({ director, onBackClick }) {
         </Row>
 
         <Button
-          variant="danger"
+          variant="secondary"
           onClick={() => {
             onBackClick(null);
           }}
