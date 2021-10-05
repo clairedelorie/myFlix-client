@@ -64,7 +64,12 @@ export class MovieView extends React.Component {
     return (
       <Row className="movie-view mt-5 m-auto ">
         <Col md={12} lg={6} className="movie-poster ">
-          <img className="w-100" src={movie.Image} />
+          <img
+            className="w-100"
+            src={movie.ImagePath}
+            width="300"
+            height="400"
+          />
         </Col>
 
         <Col md={12} lg={6} className="movie-body my-auto">
@@ -93,7 +98,7 @@ export class MovieView extends React.Component {
           </div>
           <div className="movie-buttons">
             <Button
-              varient="primary"
+              varient="secondary"
               onClick={() => {
                 onBackClick(null);
               }}
