@@ -1,6 +1,6 @@
 # myFlix-client
 ---
-![myFlix pic](image)
+![myFlix pic](src/myFlix.png)
 ---
 ## About
 
